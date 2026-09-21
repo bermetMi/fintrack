@@ -7,9 +7,9 @@ const ausgaben = [
 ];
 
 
-for(const a of ausgaben){
-        const[jahr, monat, tag] = a.datum.split("-");
-        console.log(`${tag}.${monat}. - ${a.kategorie}: ${a.betrag} EUR`)
+for (const { betrag, datum, kategorie } of ausgaben) {
+  const [jahr, monat, tag] = datum.split("-");
+  console.log(`${tag}.${monat}. - ${kategorie}: ${betrag} EUR`);
 }
 
 for(const a of ausgaben){

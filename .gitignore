@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Builds
+dist/
+build/
+
+# Umgebungsvariablen
+.env
+.env.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# macOS
+.DS_Store

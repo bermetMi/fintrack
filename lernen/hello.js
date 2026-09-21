@@ -16,20 +16,20 @@ console.log(5 === "5");
 
 
 function brutto(netto){
-    return netto * 1.19;
+    return Math.round(netto * 1.19 * 100) / 100;
 }
 
-const brutto2 = (netto) => netto * 1.19;
+const brutto2 = (netto) => Math.round(netto * 1.19 * 100) / 100;
 
 const ausgabe = {
-    beitrag: 12.5,
+    betrag: 12.5,
     kategorie:  "Essen",
     notiz: "Mittagessen",
 };
 
 console.log(ausgabe.kategorie);
-ausgabe.beitrag = 14;
-console.log(ausgabe.beitrag);
+ausgabe.betrag = 14;
+console.log(ausgabe.betrag);
 
 
 const kategorien = ["Essen", "Tanken", "Miete"];
