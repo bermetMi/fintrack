@@ -1,4 +1,5 @@
 import express from "express";
+import {transactions} from "./daten.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,6 +13,10 @@ app.get("/api/health", (req, res) => {
  res.json({status: "ok"});
 });
 
+app.get("/api/transactions",(req, res) => {
+    console.log(req.query);  
+    res.json(transactions);
+});
 
 app.listen(PORT, () => {
   console.log(`Server läuft auf http://localhost:${PORT}`);
