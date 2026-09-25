@@ -3,7 +3,7 @@ const ausgaben = [
   { betrag: 45,   kategorie: "Tanken", datum: "2026-09-15" },
   { betrag: 8.9,  kategorie: "Essen",  datum: "2026-09-16" },
   { betrag: 750,  kategorie: "Miete",  datum: "2026-09-01" },
-  { betrag: 23.4, kategorie: "Essen",  datum: "2026-09-17" },
+  { betrag: 230, kategorie: "Essen",  datum: "2026-09-17" },
 ];
 
 
@@ -38,7 +38,21 @@ function summeFuerKategorie(liste,kategorie){
     }
     return summe;
 }
-
 console.log(`Essen: ${summeFuerKategorie(ausgaben, "Essen")}`)
-
 ausgaben.reduce((summe, a) => summe + a.betrag, 0)
+
+
+
+const isBigExpense = (amount) => {
+    if (amount > 100){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+console.log(isBigExpense(750))
+console.log(isBigExpense(45))
+
+const bigExpenses = ausgaben.filter(a => isBigExpense(a.betrag));
+console.log(bigExpenses);
