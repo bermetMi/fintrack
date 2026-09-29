@@ -14,3 +14,26 @@
 - Ergebnis: bigExpenses enthält Miete (750) und Essen (230)
 - Noch unklar: Wozu diese Ja/Nein-Funktionen später konkret gebraucht werden (klärt sich mit mehr Übung)
 - Morgen: Array-Methoden (map, filter, find)
+
+## Di 29.09.2026 – Phase 0, Array-Methoden: map, filter, find
+
+**Tagesaufgabe laut Plan:** Transaktionen nach Kategorie filtern, eine Transaktion nach `id` finden. Geübt an echten `transactions`-Daten (`amountCents`, englische Feldnamen) statt an der alten `ausgaben`-Liste.
+**Status: Übungen gemacht, Verständnis noch nicht sicher ⚠️**
+
+ Gemacht
+- `transactions.filter((t) => t.category === "Essen")` → Array mit 2 Treffern
+- `transactions.find((t) => t.id === 2)` → einzelnes Objekt
+- `transactions.map((t) => t.note)` → Liste aller Notizen
+- Kombiniert: `filter` + `map` (`foodNotes`) → nur Notizen der Essen-Transaktionen
+- Dabei den **Salary-Bug** wiederentdeckt: Salary (Einnahme) hat `category: "Essen"`, dadurch taucht Salary fälschlich im Essen-Filter auf
+
+Verstanden (bestätigt durch eigene Tests)
+- `filter` gibt ein **Array** zurück (auch bei 0 oder 1 Treffer), wählt nur aus, verändert die Objekte nicht
+- `find` gibt **ein einzelnes Objekt** zurück, kein Array; bei keinem Treffer: `undefined`
+- `map` gibt ein Array **gleicher Länge** zurück, wandelt jeden Eintrag um (z. B. Objekt → nur ein Feld)
+
+Noch nicht sicher – WIEDERHOLEN beim nächsten Mal
+- [ ] Entscheidung "filter oder map?" bei neuen Aufgaben zuerst vertauscht, `find` war beide Male richtig
+
+Noch offen
+- [ ] Salary-Bug beheben
