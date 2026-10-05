@@ -37,3 +37,21 @@ Noch nicht sicher – WIEDERHOLEN beim nächsten Mal
 
 Noch offen
 - [ ] Salary-Bug beheben
+
+## Mi 30.09.2026 – Phase 0, Array-Methoden: reduce und sort
+
+**Tagesaufgabe:** Summe aller Beträge berechnen, Transaktionen nach Betrag sortieren (auf- und absteigend). Geübt an `transactions` (`daten.js`).
+
+Gemacht
+- `transactions.reduce((acc, t) => acc + t.amountCents, 0)` → Summe aller `amountCents` als eine Zahl
+- `[...transactions].sort((a, b) => a.amountCents - b.amountCents)` → aufsteigend sortiert
+- `[...transactions].sort((a, b) => b.amountCents - a.amountCents)` → absteigend sortiert
+- Dabei bewusst `[...transactions]` (Spread) verwendet, um das Original-Array nicht zu verändern
+
+Verstanden (bestätigt durch eigene Tests)
+- `reduce` läuft über alle Einträge und sammelt am Ende **einen** Wert (`acc` = Akkumulator), `0` ist der Startwert
+- `sort` verändert das Array, auf dem es aufgerufen wird (deshalb Kopie mit `[...array]` nötig)
+- Die Vergleichsfunktion bei `sort` entscheidet die Reihenfolge: `a - b` = aufsteigend, `b - a` = absteigend
+
+Noch offen
+- [ ] Salary-Bug beheben
