@@ -54,4 +54,34 @@ Verstanden (bestätigt durch eigene Tests)
 - Die Vergleichsfunktion bei `sort` entscheidet die Reihenfolge: `a - b` = aufsteigend, `b - a` = absteigend
 
 Noch offen
-- [ ] Salary-Bug beheben
+- [x] Salary-Bug beheben
+
+## Di 06.10.2026 – Phase 0: Destructuring, Fehler lesen, map
+
+**Gemacht**
+- Array/Objekt-Zugriff: `transactions[1].note`
+- Fehlermeldung gelesen: `ReferenceError: transaction is not defined`
+- Destructuring: `const { note, category } = transactions[1];`
+- `filter` und `map` mit Destructuring: `({ type }) => type === "expense"`, `({ note }) => note`
+
+**Verstanden**
+- Array = `[ ]`, Position ab 0. Objekt = `{ }`, Zugriff über Feldnamen
+- Fehlendes Feld → `undefined` (kein Fehler). Unbekannte Variable → `ReferenceError`
+- Namen in `{ }` müssen genau wie die Felder heißen
+- Das Wort links vom Pfeil muss rechts vom Pfeil benutzt werden
+
+**Wiederholen**
+- [ ] `map`: Ich schrieb `names.length` statt `name.length` (ganzes Array statt einzelner Eintrag)
+- [ ] `reduce` auffrischen
+- [ ] Destructuring in eigenen Worten: ______
+
+**Entscheidungen**
+- Salary-Bug behoben (`category: "Salary"`)
+- Plan B testen: FinTrack zuerst, Zertifizierung 45 Min./Tag
+- Pflicht laut Managerin: JavaScript, React, Express, Deployment bis ca. Februar. KI-Teil ist Bonus
+
+**Offen**
+- Managerin fragen: Was heißt „Fullstack agieren"? Zertifizierung Pflicht, mit Termin?
+- Deployment im Wochenplan ergänzen (Januar)
+
+**Morgen:** `reduce` auffrischen, dann Summe pro Kategorie
