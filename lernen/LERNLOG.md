@@ -1,4 +1,4 @@
-## Do 24.09.2026 – Tag 1: Fehlerbehandlung ✅
+## Do 24.09.2026 – Tag 1: Fehlerbehandlung 
 - Gemacht: try/catch/finally/throw ausgeführt, validateAmount geschrieben und getestet
 - Verstanden: throw wirft einen Fehler, catch fängt ihn, finally läuft immer
 - Eigene Worte: ______
@@ -6,7 +6,7 @@
 - Check: 4 von 6, offen: Wann braucht man try/catch?
 - Morgen: Bedingungen und Funktionen
 
-## Fr 25.09.2026 – Tag 2: Bedingungen und Funktionen ✅
+## Fr 25.09.2026 – Tag 2: Bedingungen und Funktionen 
 - Gemacht: isBigExpense geschrieben, mit filter auf die echte ausgaben-Liste angewendet
 - Verstanden: if prüft eine Bedingung (z. B. amount > 100), im if-Zweig läuft return true, sonst return false
 - Verstanden: objekt.eigenschaft (z. B. a.betrag) holt einen Wert aus einem Objekt
@@ -85,3 +85,27 @@ Noch offen
 - Deployment im Wochenplan ergänzen (Januar)
 
 **Morgen:** `reduce` auffrischen, dann Summe pro Kategorie
+
+## Mi 07.10.2026 – Phase 0: reduce (in Arbeit)
+
+**Gemacht**
+- Repo-Review mit Claude, Aufräumliste erstellt (siehe Offen)
+- reduce erklärt bekommen: Vergleich mit for-Schleife und Kotlin fold
+
+**Verstanden**
+- acc ist der Zettel; was die Funktion zurückgibt, wird der neue Zettel
+- Der Startwert ist der erste Zettel, nicht das Ergebnis (mit 100 als Start kommt 110 heraus, nicht 100)
+
+**Noch unklar**
+- reduce insgesamt noch nicht sicher
+
+**Offen**
+- [ ] Übung 1 in `lernen/reduce.mjs`: Summe aller amountCents, erst mit for-Schleife, dann mit reduce (erwartet 170000)
+- [ ] Übung 2: Summe nur der Ausgaben (type === "expense"), erwartet 70000
+- [ ] Danach: Summe pro Kategorie
+- [ ] Aufräumen: `--env-file` im dev-Skript, `.DS_Store` aus Git, Übungscode aus `daten.js` nach `lernen/`, Kleinkram
+- [ ] Zertifizierung Modul 2 starten
+
+**Wiederholen**
+- [ ] Destructuring in eigenen Worten
+- [ ] .mjs ist immer ein Modul; bei .js entscheidet "type" in der package.json

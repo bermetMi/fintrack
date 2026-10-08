@@ -39,7 +39,7 @@ function summeFuerKategorie(liste,kategorie){
     return summe;
 }
 console.log(`Essen: ${summeFuerKategorie(ausgaben, "Essen")}`)
-ausgaben.reduce((summe, a) => summe + a.betrag, 0)
+console.log(ausgaben.reduce((summe, a) => summe + a.betrag, 0))
 
 
 

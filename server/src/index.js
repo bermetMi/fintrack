@@ -14,7 +14,6 @@ app.get("/api/health", (req, res) => {
 });
 
 app.get("/api/transactions",(req, res) => {
-    console.log(req.query);  
     res.json(transactions);
 });
 

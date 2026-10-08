@@ -8,7 +8,7 @@ Lernen von Web-Entwicklung.
 fintrack/
 ├── .github/
 │   └── copilot-instructions.md
-├── client/          ← React-Frontend (noch leer)
+├── client/          ← React-Frontend (noch nicht angelegt)
 ├── server/          ← Express-Backend
 │   └── src/
 │       ├── index.js ← Server und Routen

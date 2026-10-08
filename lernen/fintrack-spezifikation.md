@@ -1,6 +1,6 @@
 # FinTrack – Spezifikation, Neustart-Plan & Projektregeln
-Stand: 2026-09-25 (Gesamtplan realistisch überarbeitet)
-Ersetzt die Version vom 2026-09-25 (nach Tag 2).
+Stand: 2026-10-07 (Phase 0 verlängert bis 09.10., Variante B ab 06.10., Phase 1 ab 12.10.)
+Ersetzt die Version vom 2026-09-25.
 
 ## Vorarbeit außerhalb des Plans (Notiz, 25.09.)
 Ein Server-Grundgerüst existiert schon und läuft bereits (`server/src/index.js` mit Express, 3 Routen, `server/src/daten.js` mit Beispiel-Transaktionen, `npm init` + Express installiert, `daten.js` exportiert schon Daten). Das ist Stoff aus Phase 2, ist aber schon vor dem Neustart entstanden. Wird ab Do 01.10 (Module) und in Phase 2 bewusst aufgegriffen und verstanden.
@@ -18,41 +18,48 @@ Als Fullstack-Entwicklerin mit KI ab Februar 2027 arbeiten. FinTrack ist das Ler
 
 ---
 
-## Tagesrhythmus (Mo–Fr)
-| Zeit | Was |
+## Tagesrhythmus (Mo–Fr) – Variante B (ab 06.10.2026)
+Entscheidung 06.10.2026: Variante B wird getestet. FinTrack (JavaScript) hat
+Vorrang, die Zertifizierung läuft klein weiter. Überprüfung beim Wochenabschluss
+am Fr 09.10.
+
+| Was | Dauer |
 |---|---|
-| 10:00–12:00 | Zertifizierung: Kurs |
-| 12:00–13:00 | Pause |
-| 13:00–15:00 | FinTrack: Neues lernen (Konzept, Beispiel, Verständnisfragen) |
-| 15:00–17:00 | FinTrack: Üben (nur Hinweise, keine Lösungen) |
-| 17:00–19:00 | Zertifizierung: Praxis |
+| FinTrack: Neues lernen (Konzept, Beispiel, Verständnisfragen) | Hauptteil der Lernzeit |
+| FinTrack: Üben (nur Hinweise, keine Lösungen) | Hauptteil der Lernzeit |
+| Zertifizierung: Kurs | ca. 45 Min. pro Tag |
 | Abends | 30 Min Lern-Log und Commit |
 
-**Heute (Do 24.09) Sonderfall:** Start erst um 13:00. Der Vormittags-Block Zertifizierung Kurs entfällt heute.
-Wochenende: frei, nur So-Abend 30 Min Rückblick (Phase-0-Abschluss am 03./04.10. siehe unten).
+Uhrzeiten: ______ (selbst eintragen)
+Wochenende: frei, nur So-Abend 30 Min Rückblick.
+Pflicht laut Managerin: JavaScript, React, Express und Deployment (gesamter
+Prozess) bis ca. Februar. Der KI-Teil ist Bonus.
 
 Plan B (falls der Job wieder anzieht, ca. 12 Std./Woche): Zertifizierung 1 Std. Arbeitszeit; FinTrack 1 Std. Arbeitszeit + 1,5 Std. an 3 Abenden; Sa + So je 2 Std. abends.
 
-Zertifizierungs-Stand (bitte eintragen): Kursname: ______ · aktuelles Modul: ______
+Zertifizierungs-Stand: Modul 1 (MSO Foundations) fertig am 25.09. · aktuelles Modul: Modul 2 (Production-Grade Prompting, Agents & Tool Use), noch nicht begonnen
 
 ---
 
-## Phase 0 – Neustart, reines JavaScript (24.09.–04.10.)
+## Phase 0 – Neustart, reines JavaScript (24.09.–09.10.)
 Kein Framework. Ich komme aus Java/Kotlin, deshalb Vergleiche mit Java.
 
 | Tag | Thema | Fertig, wenn ... | Erledigt |
 |---|---|---|---|
-| Do 24.09 (ab 13:00) | Fehlerbehandlung: try/catch, throw, finally, Fehlermeldungen lesen | Funktion wirft bei negativem `amountCents` einen `Error`; ich erkläre try/catch/throw und die Unterschiede zu Java | [x] |
-| Fr 25.09 | Grundlagen neu: const/let, ===, Bedingungen, Funktionen, Arrow Functions | Ausgaben über 50 € werden als "groß" markiert | [x] (Grenze selbst auf >100 € festgelegt) |
-| Sa 26.09 | Server anschauen: bestehenden Code (`index.js`, `daten.js`) erklären; Prettier einrichten (npm ist schon erledigt) | Ich kann grob sagen, was im Server passiert; Prettier formatiert automatisch | [ ] |
-| So 27.09 | frei, nur Lern-Log-Rückblick | Wochenrückblick geschrieben | [ ] |
-| Mo 28.09 | map, filter, find — geübt an `transactions`-Daten (amountCents, englische Namen) statt an `ausgaben` | Filtern nach Kategorie, Suche nach id | [ ] |
-| Di 29.09 | reduce, sort, Destructuring, Spread | Summe und Sortierung nach Betrag, ohne Vorlage | [ ] |
-| Mi 30.09 | Verschachtelte Objekte, Object.keys, ?. | Summe pro Kategorie als Objekt | [ ] |
-| Do 01.10 | Module: export/import | `server/src/berechnungen.js` angelegt, `index.js` importiert es; ich erkläre, warum man trennt | [ ] |
-| Fr 02.10 | Asynchron: Promise, async/await, fetch | Ich rufe meinen eigenen Server (`/api/transactions`) per `fetch` ab und fange Fehler mit try/catch | [ ] |
-| Sa 03.10 | Prettier fertig einrichten + Puffer | Prettier läuft; offene Punkte der Woche nachgeholt | [ ] |
-| So 04.10 | Wochenabschluss | Lern-Log fertig, Repo auf GitHub gepusht, Mini-Test (10 Fragen in eigenen Worten), Phase 0 abgehakt | [ ] |
+| Do 24.09 | Fehlerbehandlung: try/catch, throw, finally | Funktion wirft bei negativem Betrag einen `Error`; ich erkläre try/catch/throw | [x] |
+| Fr 25.09 | Bedingungen, Funktionen, Arrow Functions | Ausgaben über 100 € werden als "groß" markiert | [x] (Grenze selbst auf >100 € festgelegt) |
+| Di 29.09 | map, filter, find (an `transactions`) | Filtern nach Kategorie, Suche nach id | [x] (Verständnis noch nicht sicher) |
+| Mi 30.09 | reduce, sort, Spread | Summe und Sortierung nach Betrag | [x] (reduce wiederholen) |
+| Di 06.10 | Destructuring, Fehlermeldungen lesen, Salary-Bug beheben | Destructuring ohne Vorlage geschrieben | [x] |
+| Mi 07.10 | reduce festigen (Schleife → reduce), Summe der Ausgaben; Repo aufräumen | Ich erkläre reduce in eigenen Worten; Summe der Ausgaben = 70000 | [ ] |
+| Do 08.10 | Summe pro Kategorie als Objekt; Module: export/import | `server/src/berechnungen.js` angelegt, `index.js` importiert es; ich erkläre, warum man trennt | [ ] |
+| Fr 09.10 | async/await, fetch; Wochenabschluss | Ich rufe `/api/transactions` per `fetch` ab und fange Fehler mit try/catch; Variante B überprüft | [ ] |
+| So 11.10 | Rückblick (30 Min) | Lern-Log fertig, Repo gepusht, Mini-Test (10 Fragen in eigenen Worten) | [ ] |
+
+Puffer (nach Bedarf in Phase 1 nachholen): Prettier einrichten, verschachtelte
+Objekte / Object.keys / ?., Server-Code (`index.js`, `daten.js`) in eigenen
+Worten erklären. Wird `async/fetch` am Fr nicht fertig, ist es die erste Stunde
+am Mo 12.10.
 
 Offene Verständnisfragen aus dem Lern-Log (vom 24.09.):
 - [ ] Warum schreibt man `new Error("...")` statt nur einen Text zu werfen?
@@ -61,30 +68,30 @@ Offene Verständnisfragen aus dem Lern-Log (vom 24.09.):
 
 ---
 
-## Phase 1 – Frontend mit Fake-Daten (05.10.–15.11.)
+## Phase 1 – Frontend mit Fake-Daten (12.10.–20.11.)
 | Woche | Thema | Fertig, wenn ... |
 |---|---|---|
-| 05.–09.10 | Vite, JSX, Komponenten, Props | Transaktionsliste zeigt Fake-Daten |
-| 12.–16.10 | useState, Events, Listen mit key | Löschen-Button entfernt einen Eintrag |
-| 19.–23.10 | Formulare (kontrollierte Inputs) | Neue Transaktion hinzufügen ✅ Meilenstein 25.10. |
-| 26.–30.10 | React Router | Alle 5 Seiten als Gerüst erreichbar |
-| 02.–06.11 | Dashboard + Recharts + Vitest | Summen und Diagramm; Tests für berechnungen.js |
-| 09.–13.11 | Kategorien-Seite, Tailwind, Puffer | Phase 1 fertig |
+| 12.–16.10 | Vite, JSX, Komponenten, Props | Transaktionsliste zeigt Fake-Daten |
+| 19.–23.10 | useState, Events, Listen mit key | Löschen-Button entfernt einen Eintrag |
+| 26.–30.10 | Formulare (kontrollierte Inputs) | Neue Transaktion hinzufügen ✅ Meilenstein 01.11. |
+| 02.–06.11 | React Router | Alle 5 Seiten als Gerüst erreichbar |
+| 09.–13.11 | Dashboard + Recharts + Vitest | Summen und Diagramm; Tests für berechnungen.js |
+| 16.–20.11 | Kategorien-Seite, Tailwind, Puffer | Phase 1 fertig |
 
-## Phase 2 – Backend ohne Login (16.11.–06.12.)
+## Phase 2 – Backend ohne Login (23.11.–11.12.)
 Login kommt bewusst noch nicht vor, siehe Entscheidung oben (`userId = 1`).
 
 | Woche | Thema | Fertig, wenn ... |
 |---|---|---|
-| 16.–20.11 | CRUD im Speicher, Statuscodes, Zod | POST/PUT/DELETE für Transaktionen |
-| 23.–27.11 | PostgreSQL (OrbStack) + Prisma | Daten liegen in der Datenbank |
-| 30.11.–04.12 | Filter, /api/summary, Supertest | 3 Routen getestet, Phase 2 fertig |
+| 23.–27.11 | CRUD im Speicher, Statuscodes, Zod | POST/PUT/DELETE für Transaktionen |
+| 30.11.–04.12 | PostgreSQL (OrbStack) + Prisma | Daten liegen in der Datenbank |
+| 07.–11.12 | Filter, /api/summary, Supertest | 3 Routen getestet, Phase 2 fertig |
 
 ## Phase 3–5
 | Zeitraum | FinTrack | Zertifizierung |
 |---|---|---|
-| 07.–13.12 | Frontend und Backend verbinden (TanStack Query, CORS/Proxy) | Übungsfragen |
-| 14.–27.12 | Puffer | Prüfung hat Vorrang |
+| 14.–18.12 | Frontend und Backend verbinden (TanStack Query, CORS/Proxy) | Übungsfragen |
+| 21.–27.12 | Puffer | Prüfung hat Vorrang |
 | Dezember | — | **Prüfung ablegen** |
 | 04.–15.01 | Login (register/login, bcrypt, Cookie, echte userId statt 1) | — |
 | 18.–22.01 | isUnexpected (Häkchen) + Deployment | Bewerbungen vorbereiten |
@@ -94,9 +101,9 @@ Login kommt bewusst noch nicht vor, siehe Entscheidung oben (`userId = 1`).
 ---
 
 ## Zu klärende Widersprüche (gefunden 25.09.)
-- [ ] **Geld-Regel uneinheitlich:** `CLAUDE.md`/`copilot-instructions.md` sagen "auf 2 Nachkommastellen runden", diese Spezifikation sagt "Cent als Int, kein Runden". **Richtig ist: Cent als Int, kein Runden.** In `CLAUDE.md` und `copilot-instructions.md` korrigieren.
-- [ ] **KI-Regeln fehlen in `CLAUDE.md`/`copilot-instructions.md`:** "Nur Hinweise, keine Lösungen" und "keine ganzen Dateien schreiben" stehen bisher nur hier. Dort ergänzen, sonst befolgen Copilot/Claude im Code diese Regeln nicht.
-- [ ] Salary mit `category: "Essen"`: noch ungeklärt (siehe offene Fragen oben).
+- [x] **Geld-Regel:** Cent als Int, kein Runden. In `CLAUDE.md` und `copilot-instructions.md` korrigiert.
+- [x] **KI-Regeln:** "Nur Hinweise, keine Lösungen" und "keine ganzen Dateien" stehen jetzt in `CLAUDE.md` und `copilot-instructions.md`.
+- [x] Salary mit `category: "Essen"`: behoben am 06.10. (`category: "Salary"`). Offene Frage: Sollen Einnahmen überhaupt eine Kategorie haben?
 
 ---
 
@@ -158,7 +165,7 @@ Sicherheit: keine Secrets im Code (.env), Passwörter nur als bcrypt-Hash, jede 
 | Woche | Tage geschafft (von 5) | Aufgaben geschafft | Erklär-Test (von 5) | Notiz |
 |---|---|---|---|---|
 | 24.09.–27.09. | 2 von 4 (Stand 25.09.) | try/catch/throw/finally; isBigExpense + filter | 4/6 (24.09.) | Server-Vorarbeit entdeckt, siehe Notiz oben |
-| 28.09.–04.10. | | | | |
+| 28.09.–04.10. | 2 von 5 (29.09., 30.09.) | map/filter/find; reduce/sort | – (nicht gemacht) | Plan lag nach Woche 1 etwa 1 Woche zurück; Variante B ab 06.10. |
 
 ## Lern-Log Vorlage (jeden Abend, 30 Min)
 ```
