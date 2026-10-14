@@ -24,3 +24,8 @@ console.log("Expense transactions: ", expense);
 
 const notes = transactions.map(({ note }) => note);
 console.log("Notes: ", notes);
+
+
+const schrank = {Salary: 100000}
+console.log("Salray",schrank["Salary"]);
+console.log("Essen", schrank["Essen"]);

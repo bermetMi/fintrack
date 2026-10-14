@@ -1,3 +1,5 @@
+
+
 export const transactions = [
     
     {id: 1, amountCents: 1000 * 100, type: "income", note: "Salary", category: "Salary", date: "2026-09-21"},
@@ -5,4 +7,3 @@ export const transactions = [
     {id: 3, amountCents: 200 * 100, type: "expense", note: "Transport", category: "Transport", date: "2026-09-23"}
 
 ];
-
