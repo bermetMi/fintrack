@@ -312,5 +312,5 @@ Noch offen
 - [ ] Managerin fragen: Was heißt "Fullstack agieren"? Welche KI-API darf im Unternehmen benutzt werden?
 - [ ] Plan: früher Deployment-Test nach Phase 1 entscheiden (noch nicht im Plan)
 
-**Commit:** **\_\_**
+**Commit:** 18c3bef
 **Morgen:** Fr 16.10: Grammatik Fr (Präpositionen), Props/key wiederholen, Betrag lesbar machen, Wochenabschluss, KI in VS Code (30 Min, neu)
