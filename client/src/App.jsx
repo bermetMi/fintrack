@@ -3,6 +3,13 @@ import heroImg from "./assets/hero.png";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "./assets/vite.svg";
 import "./App.css";
+import TransactionItem from "./TransactionItem";
+
+const transactions = [
+  { id: 1, note: "Salary", amountCents: 10000 },
+  { id: 2, note: "Groceries", amountCents: 5000 },
+  { id: 3, note: "Transport", amountCents: 2000 },
+];
 
 function App() {
   const [count, setCount] = useState(0);
@@ -17,6 +24,13 @@ function App() {
         </div>
         <div>
           <h1>FinTrack</h1>
+          {transactions.map((transaction) => (
+            <TransactionItem
+              key={transaction.id}
+              note={transaction.note}
+              amountCents={transaction.amountCents}
+            />
+          ))}
           <p>
             Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
           </p>

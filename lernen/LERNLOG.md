@@ -244,9 +244,13 @@ Noch offen
 
 - Bündeln: Grund genannt ("schneller im Browser"), aber noch nicht mit "viele Dateien = viele Anfragen" erklärt (mit Hilfe)
 - `throw` in eigenen Worten noch einmal abfragen
+- Props: Idee verstanden (Komponente bekommt Werte von außen, damit sie wiederverwendbar ist)
+- Destructuring: Begriff und Wirkung noch nicht sicher (in Props-Parameterliste `{ note, amountCents }`)
+- Falsche Prop-Namen: kein Fehler, sondern `undefined` und leere Anzeige (erst mit Hilfe)
 
 **Wiederholen**
 
+- [ ] Destructuring in eigenen Worten (Objekt auspacken, Namen müssen zu den Feldern passen)
 - [ ] Rollen im Fehlerfall: `if` erkennt, `throw` wirft, `catch` fängt
 - [ ] Bündeln in einem Satz mit "Anfragen" erklären
 - [ ] `.jsx`: Woran erkennt man JSX im Code?
@@ -257,5 +261,56 @@ Noch offen
 - [ ] Eigene Komponente für die Transaktionsliste
 - [ ] Wiederholen aus Di/Mo: Backticks, `fetch` im `try`, Destructuring in eigenen Worten
 
+**Commit:** f90e6c2
+**Morgen:** Destructuring wiederholen, dann Props (Packen/Auspacken) und Komponente `TransactionList` mit Fake-Daten
+
+## Do 15.10.2026 – Phase 1: Props, Komponenten, map, key
+
+**Gemacht**
+
+- Grammatik Do: Konjunktiv II / Second Conditional (Übung beide Sätze richtig)
+- Destructuring wiederholt: `const { amountCents, type } = transactions[2];` ohne Vorlage geschrieben
+- Props erklärt bekommen und `client/src/TransactionItem.jsx` mit `{ note, amountCents }` gebaut
+- In `App.jsx` ein Array `transactions` mit 3 Objekten angelegt und mit `map` als Liste angezeigt, `key={transaction.id}` ergänzt
+- Wochenziel erreicht: Transaktionsliste zeigt Fake-Daten (einen Tag früher als geplant)
+- Fehler gelesen: `does not provide an export named 'TransactionItem'` (`export default` braucht Import ohne `{ }`), fehlende Klammer bei `map`, `key`-Warnung in der Konsole
+- Entscheidung: Zertifizierung aus dem Plan genommen (pausiert, Stand Modul 1 fertig); Haken-Spalte in der Phase-0-Tabelle durch Notiz-Spalte ersetzt
+- Plan besprochen: Deployment und KI fehlten mir im Projekt. Ziel: ab 2027 im Unternehmen in ein neues Projekt (QA, Backend, etwas Frontend, Deployment, mit KI)
+- Entscheidung KI: Zuerst KI in VS Code konfigurieren (Instruktionen, Prompts, Agenten, Skills), 30 Min täglich ab Fr 16.10. Ob ein KI-Agent Teil von FinTrack wird, entscheide ich am Ende von Phase 2 (11.12.)
+- Spezifikation angepasst: KI-Teil nicht mehr Bonus, Bewerbungen ersetzt durch Gespräch im Unternehmen
+
+**Verstanden (in eigenen Worten)**
+
+- `<p>{amountCents}</p>` zeigt den Wert (2000), `<p>amountCents</p>` zeigt den Text
+- Falscher Feldname (`notiz` statt `note`) ergibt `undefined`, keine Fehlermeldung
+- `import Foo from "./Foo"` gehört zu `export default function Foo`
+- `id` ist ein Feld des Eintrags und bleibt gleich ("2 bleibt immer 2"), deshalb ist sie als `key` geeignet
+- `map` erzeugt eine neue Liste; `transactions` ist die Liste, `transaction.note` ist der Wert bei jedem Durchlauf; 3 Objekte ergeben 3 `<TransactionItem />`
+
+**Noch unklar**
+
+- Props: ich nannte nur die Feldnamen; `props` ist ein Objekt mit Namen **und** Werten
+- `{ }` im JSX: erst "übersetzen in JSX"; richtig ist: JavaScript-Wert einsetzen
+- Warum der Index als `key` schlecht ist: Folge beim Löschen nur mit Hilfe verstanden
+- Komponente = Funktion mit Großbuchstaben, die JSX zurückgibt (Frage kam von mir, noch nicht in eigenen Worten erklärt)
+- Array aus Einzelwerten (`[3, "Salary", 10000]`) gegen Array aus Objekten
+- Second Conditional: warum nach `if` Past Simple steht (erst "weiss ich nicht", dann mit "keine Million" verstanden)
+- Unterschied: KI in VS Code konfigurieren (Hilfe beim Entwickeln) gegen KI-Agent in der App (Teil des Produkts): "weiss ich nicht ganz genau"
+
+**Wiederholen**
+
+- [ ] Destructuring in eigenen Worten erklären (noch nicht gemacht)
+- [ ] `export default` gegen `export function`: Import mit und ohne `{ }`
+- [ ] Rollen im Fehlerfall: `if` erkennt, `throw` wirft, `catch` fängt
+- [ ] Bündeln in einem Satz mit "Anfragen" erklären; `.jsx` erkennen
+
+**Offen**
+
+- [ ] `App.jsx`: überflüssigen Import `import "./TransactionItem";` löschen
+- [ ] Betrag lesbar anzeigen (10000 Cent als 100,00 €)
+- [ ] Variante B überprüfen (war für Fr 09.10 geplant); Rückblick So 11.10 fehlt im Log
+- [ ] Managerin fragen: Was heißt "Fullstack agieren"? Welche KI-API darf im Unternehmen benutzt werden?
+- [ ] Plan: früher Deployment-Test nach Phase 1 entscheiden (noch nicht im Plan)
+
 **Commit:** **\_\_**
-**Morgen:** Komponente `TransactionList` mit Fake-Daten und Props
+**Morgen:** Fr 16.10: Grammatik Fr (Präpositionen), Props/key wiederholen, Betrag lesbar machen, Wochenabschluss, KI in VS Code (30 Min, neu)
