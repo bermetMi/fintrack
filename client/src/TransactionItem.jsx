@@ -6,6 +6,7 @@ export default function TransactionItem({
   id,
   onDelete,
   transactions,
+  category,
 }) {
   const handleDelete = () => {
     const newTransactions = transactions.filter((t) => t.id !== id);
@@ -15,7 +16,7 @@ export default function TransactionItem({
   return (
     <p>
       {" "}
-      {note} : {formatAmount(amountCents)}
+      {category} - {note} : {formatAmount(amountCents)}
       <button onClick={handleDelete}>Delete</button>
     </p>
   );
