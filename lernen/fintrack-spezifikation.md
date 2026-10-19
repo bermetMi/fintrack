@@ -46,6 +46,9 @@ KI-Entscheidung 15.10.2026: Zuerst KI in VS Code konfigurieren lernen
 (copilot-instructions, `.prompt.md`, `.agent.md`, Skills). Ob ein KI-Agent oder
 Kategorie-Vorschlag Teil von FinTrack wird, wird am Ende von Phase 2 (11.12.)
 entschieden.
+Lern-Log-Automatisierung (Entscheidung 19.10.2026): Zuerst manuell mit einer
+`.prompt.md` (`.github/prompts/`, Aufruf per `/`). Automatisch (z. B. per Hook)
+kommt später, erst wenn die Prompt-Datei sicher sitzt.
 Offen: Welche KI-API darf im Unternehmen benutzt werden? (Managerin fragen)
 
 Plan B (falls der Job wieder anzieht, ca. 12 Std./Woche): FinTrack 1 Std. Arbeitszeit + 1,5 Std. an 3 Abenden; Sa + So je 2 Std. abends.

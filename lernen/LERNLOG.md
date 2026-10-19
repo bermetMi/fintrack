@@ -314,3 +314,35 @@ Noch offen
 
 **Commit:** 18c3bef
 **Morgen:** Fr 16.10: Grammatik Fr (Präpositionen), Props/key wiederholen, Betrag lesbar machen, Wochenabschluss, KI in VS Code (30 Min, neu)
+
+## Mo 19.10.2026 – Phase 1: useState, Delete-Button, Vorbereitung Formulare
+
+**Gemacht**
+
+- formatAmount-Funktion in `client/src/formatters.js` geschrieben (Cent → €)
+- `transactions` von fester Liste zu `useState` umgewandelt
+- TransactionItem Props erweitert: `id`, `onDelete`, `transactions`
+- Delete-Button in jeder Zeile gebaut; `handleDelete` mit `filter` geschrieben
+- Alle 3 Einträge gelöscht zum Testen → funktioniert
+- Code-Cleanup: alte Imports, `count`-Button, Hero-Bilder, Next-Steps Section weg
+
+**Verstanden (in eigenen Worten)**
+
+- `useState` gibt ein Array mit 2 Elementen zurück: [Wert, Setter-Funktion]
+- Destructuring `const [transactions, setTransactions]` packt das Array aus
+- `transactions` ist die Variable, `setTransactions` ruft die Setter-Funktion auf
+- Beim Löschen: neue Liste ohne den Eintrag erstellen (mit `filter`), dann `setTransactions` aufrufen
+- React zeichnet automatisch neu, wenn `setTransactions` aufgerufen wird
+- `id` bleibt gleich ("2 bleibt immer 2"), deshalb gut für `filter` und `key`
+
+**Noch unklar**
+
+- [ ] Warum ist `Date.now()` eine gute `id` für neue Einträge? (kommt beim Formulare-Thema)
+
+**Offen**
+
+- [ ] Commit: noch nicht gemacht
+- [ ] Formulare starten: kontrollierte Inputs, Add-Button
+
+**Commit:** **\_\_**
+**Morgen:** Formulare (Di 20.10): `<input>` für note und amountCents, `onChange`, Add-Button schreiben
