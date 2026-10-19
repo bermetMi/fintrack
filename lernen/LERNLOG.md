@@ -315,34 +315,47 @@ Noch offen
 **Commit:** 18c3bef
 **Morgen:** Fr 16.10: Grammatik Fr (Präpositionen), Props/key wiederholen, Betrag lesbar machen, Wochenabschluss, KI in VS Code (30 Min, neu)
 
-## Mo 19.10.2026 – Phase 1: useState, Delete-Button, Vorbereitung Formulare
+## Mo 19.10.2026 – Phase 1: useState, Delete-Button, Formulare, Router, Summary
 
 **Gemacht**
 
 - formatAmount-Funktion in `client/src/formatters.js` geschrieben (Cent → €)
 - `transactions` von fester Liste zu `useState` umgewandelt
-- TransactionItem Props erweitert: `id`, `onDelete`, `transactions`
-- Delete-Button in jeder Zeile gebaut; `handleDelete` mit `filter` geschrieben
-- Alle 3 Einträge gelöscht zum Testen → funktioniert
+- TransactionItem Props erweitert: `id`, `onDelete`
+- Delete-Button in jeder Zeile mit `handleDelete` (nutzt `filter`) gebaut und getestet
+- Formulare mit Validierung (leere Felder, negative Zahlen blockiert)
+- TransactionList-Komponente ausgelagert → `App.jsx` sauberer
+- Summary mit `reduce` hinzugefügt (Total aller Ausgaben oben anzeigen)
+- Kategorien-Dropdown mit `<select>` und `<option>` gebaut
 - Code-Cleanup: alte Imports, `count`-Button, Hero-Bilder, Next-Steps Section weg
+- **React Router installiert und `BrowserRouter` + `Routes` in `App.jsx` eingebaut** (mit Navigation zu Home, Transactions, Categories, Stats, Settings)
+- `pages/` Ordner angelegt mit `Home.jsx` und `Transactions.jsx`
 
 **Verstanden (in eigenen Worten)**
 
-- `useState` gibt ein Array mit 2 Elementen zurück: [Wert, Setter-Funktion]
-- Destructuring `const [transactions, setTransactions]` packt das Array aus
-- `transactions` ist die Variable, `setTransactions` ruft die Setter-Funktion auf
-- Beim Löschen: neue Liste ohne den Eintrag erstellen (mit `filter`), dann `setTransactions` aufrufen
-- React zeichnet automatisch neu, wenn `setTransactions` aufgerufen wird
-- `id` bleibt gleich ("2 bleibt immer 2"), deshalb gut für `filter` und `key`
+- `useState` gibt ein Array `[Wert, SetterFunktion]` zurück; Destructuring packt es aus
+- Beim Ändern: neue Liste/Objekt mit `...` Spread erstellen (nicht mutieren), dann `setTransactions` aufrufen
+- React zeichnet automatisch neu, wenn ein State mit Setter verändert wird
+- `filter` zum Löschen: neue Liste ohne den Eintrag, dann `setTransactions` aufrufen
+- `reduce` zum Summieren: alle Beträge addieren und anzeigen
+- `<select>` und `<option>` sind wie Input, aber mit Auswahlmöglichkeiten
+- Props durch mehrere Komponenten weitergeben (App → TransactionList → TransactionItem)
+- `id` bleibt gleich, deshalb gut für `filter` und `key`
+- `Date.now()` gibt eine eindeutige Nummer → gute `id` für neue Einträge (keine Duplikate)
+- `BrowserRouter` wickelt die ganze App ein; `Routes` definiert die Seiten; `Link` navigiert (ohne Seite zu neuladen)
 
 **Noch unklar**
 
-- [ ] Warum ist `Date.now()` eine gute `id` für neue Einträge? (kommt beim Formulare-Thema)
+- Komponenten-Struktur mit Router: `pages/Home.jsx` hat noch den alten Code (Formulare + Transaktionsliste zusammen) statt nur Übersicht zu zeigen
 
 **Offen**
 
-- [ ] Commit: noch nicht gemacht
-- [ ] Formulare starten: kontrollierte Inputs, Add-Button
+- [ ] `pages/Home.jsx` überarbeiten: nur Summary + TransactionList (Übersicht)
+- [ ] `pages/Transactions.jsx` ausfüllen: nur das Formular zum Hinzufügen
+- [ ] State-Struktur entscheiden: bleibt `transactions` in `App.jsx` (gemeinsam) oder in einzelne Seiten verteilen?
 
-**Commit:** 033e9a6
-**Morgen:** Formulare (Di 20.10): `<input>` für note und amountCents, `onChange`, Add-Button schreiben
+**Commits:**
+- 033e9a6: feat: add delete button and amount formatting
+- 1bee610: add categories, summary total, and refactor TransactionList component
+
+**Morgen:** Di 20.10: Router aufräumen – Seiten sauber trennen, State-Management klären
