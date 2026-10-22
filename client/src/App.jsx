@@ -2,6 +2,9 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Transactions from "./pages/Transactions";
 import { useState } from "react";
+import Categories from "./pages/Categories";
+import Stats from "./pages/Stats";
+import Settings from "./pages/Settings";
 
 export default function App() {
   const [transactions, setTransactions] = useState([
@@ -39,9 +42,9 @@ export default function App() {
             />
           }
         />
-        <Route path="/categories" element={<div>Categories (später)</div>} />
-        <Route path="/stats" element={<div>Stats (später)</div>} />
-        <Route path="/settings" element={<div>Settings (später)</div>} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/stats" element={<Stats />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </BrowserRouter>
   );

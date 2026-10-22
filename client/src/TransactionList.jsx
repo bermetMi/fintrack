@@ -10,7 +10,6 @@ export default function TransactionList({ transactions, onDelete }) {
           amountCents={transaction.amountCents}
           id={transaction.id}
           onDelete={onDelete}
-          transactions={transactions}
           category={transaction.category}
         />
       ))}

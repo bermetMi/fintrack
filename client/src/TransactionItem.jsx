@@ -5,12 +5,10 @@ export default function TransactionItem({
   amountCents,
   id,
   onDelete,
-  transactions,
   category,
 }) {
   const handleDelete = () => {
-    const newTransactions = transactions.filter((t) => t.id !== id);
-    onDelete(newTransactions);
+    onDelete(id);
   };
 
   return (

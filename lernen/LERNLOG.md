@@ -355,7 +355,54 @@ Noch offen
 - [ ] State-Struktur entscheiden: bleibt `transactions` in `App.jsx` (gemeinsam) oder in einzelne Seiten verteilen?
 
 **Commits:**
+
 - 033e9a6: feat: add delete button and amount formatting
 - 1bee610: add categories, summary total, and refactor TransactionList component
 
 **Morgen:** Di 20.10: Router aufräumen – Seiten sauber trennen, State-Management klären
+
+## Di 20.10.2026 – Phase 1: State hochheben, Props, Formular verschieben
+
+**Gemacht**
+
+- Grammatik Di: Perfekt/Präteritum und Past Simple vs. Present Perfect
+- `transactions` mit `useState` von `Home` nach `App` verschoben (State hochgehoben)
+- `transactions` und `setTransactions` per Props an `Home` und `Transactions` weitergegeben
+- Formular (`note`, `amount`, `category`, `handleAddTransaction`, Inputs) von `Home` nach `Transactions` verschoben
+- `Home` aufgeräumt: nur noch Summe und Liste, ESLint ohne Fehler
+- Fehler gelesen: `transactions is not defined` (leere Seite), Komma zwischen Props im JSX, `500` von Vite als Rest eines ungültigen Moments, `useState` außerhalb der Komponente
+- Mit `console.log` in `Transactions.jsx` geprüft, ob die Prop ankommt (Browser-Konsole, Seite `/transactions` öffnen)
+
+**Verstanden (in eigenen Worten)**
+
+- `useState` speichert den State einer Komponente
+- Die Liste muss gespeichert sein, damit man sie erweitern oder löschen kann
+- `transactions` liegt zentral in `App`, weil mehrere Seiten sie benutzen
+- Bei einer normalen Variable `note` bleibt der getippte Text nicht im Feld stehen (Ja/Nein richtig)
+- Die Transactions-Seite braucht `note` und `transactions`: `note`, um den Eintrag zu bauen, `transactions`, um ihn an die Liste anzuhängen
+- Ich habe die Prop-Zeile `<Home transactions={transactions} setTransactions={setTransactions} />` am Ende selbst richtig geschrieben (nach mehreren Hinweisen)
+
+**Noch unklar**
+
+- Warum eine normale Variable nicht reicht: React merkt die Änderung nicht und der Wert geht beim Neuzeichnen verloren (nur mit Hilfe)
+- Warum `note` in `Transactions` bleibt und nicht in `App`: nur das Formular braucht es, `Home` nicht
+- Komma oder Leerzeichen: Komma in Parameterlisten, Arrays, Objekten; Leerzeichen zwischen Props im Tag (zweimal falsch, `<Home a={a}, b={b} />`)
+- `function Transactions({ transactions })` (mit `{ }`) gegen `function Transactions(transactions)`: ohne `{ }` ist `transactions` das ganze Props-Objekt
+- Gedächtnis: der Name im `{ }` muss genau zur Prop passen (`transaction` gegen `transactions`), sonst `undefined`
+- Grammatik: `I have already finished` (nicht `I already finished`), `I have written … since Monday` (nicht `wrote`); `She has lived in Berlin for five years` war richtig, aber ohne Begründung
+
+**Wiederholen**
+
+- [ ] Destructuring in eigenen Worten (noch offen seit 14.10.)
+- [ ] `export default` gegen `export function`: Import mit und ohne `{ }`
+- [ ] Props: Komma oder Leerzeichen? Eigene Beispiele aufschreiben
+- [ ] Warum `useState` und nicht `let`: in einem Satz mit "Neuzeichnen" erklären
+
+**Offen**
+
+- [ ] Lern-Log-Eintrag von Fr 16.10. fehlt, Rückblick vom So 11.10. fehlt
+- [ ] `git push` (Commit liegt nur lokal), Tippfehler `"` am Ende der Commit-Nachricht
+- [ ] `.github/prompts/lernlog.prompt.md` hat nur den Kopf, Anweisungen schreiben (KI in VS Code, 30 Min)
+
+**Commit:** 6fc0139 (refactor: lift transactions state to App, move form to Transactions page)
+**Morgen:** Mi 21.10: Wiederholen (Props: Komma/Leerzeichen, `useState` gegen `let`), dann Formular festigen (Meilenstein 01.11.: neue Transaktion hinzufügen ist erreicht, jetzt Validierung ohne `alert`?)

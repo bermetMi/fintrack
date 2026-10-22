@@ -4,6 +4,10 @@ import formatAmount from "../formatters";
 function Home({ transactions, setTransactions }) {
   const total = transactions.reduce((sum, t) => sum + t.amountCents, 0);
 
+  function handleDelete(id) {
+    setTransactions(transactions.filter((t) => t.id !== id));
+  }
+
   return (
     <>
       <section id="center">
@@ -12,7 +16,7 @@ function Home({ transactions, setTransactions }) {
           <p> Total: {formatAmount(total)}</p>
           <TransactionList
             transactions={transactions}
-            onDelete={setTransactions}
+            onDelete={handleDelete}
           />
         </div>
       </section>

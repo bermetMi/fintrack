@@ -5,16 +5,17 @@ export default function Transactions({ transactions, setTransactions }) {
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("Essen");
   const categories = ["Essen", "Transport", "Salary", "Entertainment"];
+  const [error, setError] = useState("");
 
   const handleAddTransaction = () => {
     if (!note || !amount) {
-      alert("Bitte alle Felder ausfüllen!");
+      setError("Bitte alle Felder ausfüllen!");
       return;
     }
 
     const amountNumber = parseInt(amount);
     if (isNaN(amountNumber) || amountNumber <= 0) {
-      alert("Betrag muss eine positive Zahl sein!");
+      setError("Betrag muss eine positive Zahl sein!");
       return;
     }
 
@@ -29,6 +30,7 @@ export default function Transactions({ transactions, setTransactions }) {
     setNote("");
     setAmount("");
     setCategory("Essen");
+    setError("");
   };
 
   return (
@@ -43,7 +45,6 @@ export default function Transactions({ transactions, setTransactions }) {
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
       />
-
       <select value={category} onChange={(e) => setCategory(e.target.value)}>
         {categories.map((cat) => (
           <option key={cat} value={cat}>
@@ -51,8 +52,8 @@ export default function Transactions({ transactions, setTransactions }) {
           </option>
         ))}
       </select>
-
       <button onClick={handleAddTransaction}>Add</button>
+      {error && <p>{error}</p>}
     </div>
   );
 }
