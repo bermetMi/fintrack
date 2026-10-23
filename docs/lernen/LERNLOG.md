@@ -656,4 +656,26 @@ Copilot hat beim Umbenennen von Kategorien auch die Zuordnung vorhandener Transa
 - Geprüft: 53 automatisierte Tests, ESLint und Build erfolgreich; bekannte
   Bundle-Größenwarnung bleibt. Verständnis der neuen Umsetzung noch nicht geprüft.
 
-**Commit:** `3338825` (Frontend Phase 1 abgeschlossen, Agenten, Doku unter `docs/`); noch nicht gepusht
+**Commit:** `3338825` (Frontend Phase 1 abgeschlossen, Agenten, Doku unter `docs/`) und `954822e` (Lernlog); beide gepusht
+
+**Entscheidung: CSS statt Tailwind**
+
+- Das Frontend ist vollständig mit eigenem CSS gestaltet. Die Nutzerin hat sich
+  bewusst für CSS statt Tailwind entschieden; Tailwind ist kein offener Punkt mehr.
+- Lernschwerpunkt laut Nutzerin: als Fullstack-Entwicklerin mit KI arbeiten. Ein
+  Großteil des Frontends ist mit KI entstanden. Nächste KI-Themen: Skills und
+  spezifikationsgetriebene Entwicklung (wie man eine Spezifikation mit KI nutzt).
+
+**KI-Thema: erster Skill**
+
+- Konzept besprochen: Ein Skill ist ein wiederverwendbarer Arbeitsablauf
+  („Rezept“), kein Agent. Ein Skill kann von mehreren Agenten genutzt werden;
+  die Rechte des Agenten gelten weiter. Die `description` entscheidet, ob die KI
+  den Skill findet.
+- Erster projektlokaler Skill `.github/skills/feature-umsetzen/`: Ablauf in
+  `SKILL.md`, Vorlage für Fertig-Kriterien in `assets/`, Prüfskript (Test, Lint,
+  Build) in `scripts/`. Keine externen Skills übernommen.
+- Geprüft: Skill-Kopfbereich gültig (Name passt zum Ordner), Verweise vorhanden,
+  Prüfskript ausgeführt (53 Tests, Lint und Build erfolgreich). Der Skill wurde
+  noch nicht in einem echten Feature-Auftrag eingesetzt.
+- Verstanden (in eigenen Worten): noch nicht geprüft.

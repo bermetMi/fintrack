@@ -1,37 +1,86 @@
 # FinTrack
 
-Ein Lernprojekt zum Tracken von Ausgaben – entsteht Schritt für Schritt beim
-Lernen von Web-Entwicklung.
+Ein Lernprojekt zum Tracken von Einnahmen und Ausgaben. Es entsteht Schritt für
+Schritt mit einem Ziel: als Fullstack-Entwicklerin mit KI arbeiten zu können
+(React, Express, später Datenbank, Login und Deployment).
+
+Der verbindliche Plan steht in der [Spezifikation](docs/fintrack-spezifikation.md),
+der Lernstand im [Lernlog](docs/lernen/LERNLOG.md).
+
+## Aktueller Stand
+
+| Phase | Inhalt | Stand |
+| --- | --- | --- |
+| 0 | JavaScript-Grundlagen | abgeschlossen |
+| 1 | React-Frontend mit Fake-Daten | funktional abgeschlossen (23.10.2026); Erklären in eigenen Worten offen |
+| 2 | Express-Backend mit Datenbank | ab 23.11.2026; bisher nur ein Grundgerüst |
+| 3–5 | Verbinden, Login, Deployment, Portfolio | Dezember 2026 bis Januar 2027 |
+
+Das Frontend bietet drei Seiten:
+
+- **Übersicht:** Einnahmen, Ausgaben, Differenz, Zeitraum von–bis,
+  Ausgaben-Diagramm, vollständige Transaktionsliste; Bearbeiten und Löschen
+- **Transaktionen:** neue Einnahmen und Ausgaben erfassen, mit Euro-Umrechner
+- **Kategorien:** Kategorien für Einnahmen und Ausgaben anlegen, umbenennen, löschen
+
+Daten liegen bis Phase 2 nur im React-State und gehen beim Neuladen verloren.
 
 ## Struktur
+
 ```
 fintrack/
 ├── .github/
-│   ├── agents/      ← Projektlokale Fachagenten
-│   ├── prompts/     ← Wiederverwendbare Chat-Aufträge
-│   └── copilot-instructions.md
-├── client/          ← React-Frontend
-├── server/          ← Express-Backend
+│   ├── copilot-instructions.md ← KI-Regeln, die immer gelten
+│   ├── agents/                 ← KI-Rollen (wer arbeitet, mit welchen Rechten)
+│   ├── skills/                 ← KI-Arbeitsabläufe (wie gearbeitet wird)
+│   └── prompts/                ← Gespeicherte Einzelaufträge (z. B. /lernlog)
+├── client/                     ← React-Frontend (Vite)
 │   └── src/
-│       ├── index.js        ← Server und Routen
-│       ├── daten.js        ← Beispiel-Transaktionen
-│       └── berechnungen.js ← Summen pro Kategorie
+│       ├── pages/              ← Seiten: Übersicht, Transaktionen, Kategorien
+│       ├── *.jsx               ← Komponenten
+│       ├── *.js                ← Berechnungen, Filter, Formatierung
+│       └── *.test.js(x)        ← Tests (Vitest)
+├── server/                     ← Express-Backend
+│   └── src/
+│       ├── index.js            ← Server und Routen
+│       ├── daten.js            ← Beispiel-Transaktionen
+│       └── berechnungen.js     ← Summen pro Kategorie
 ├── docs/
 │   ├── fintrack-spezifikation.md ← Verbindliche Spezifikation und Lernplan
 │   └── lernen/
 │       └── LERNLOG.md            ← Lerntagebuch
-├── lernen/          ← Übungen (JavaScript-Grundlagen)
-├── .gitignore
-├── CLAUDE.md
+├── lernen/                     ← Übungen (JavaScript-Grundlagen)
+├── CLAUDE.md                   ← KI-Regeln für Claude (synchron zu copilot-instructions.md)
 └── README.md
 ```
 
+## Frontend starten
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+Danach erreichbar unter http://localhost:5173. Prüfungen:
+
+```bash
+npm test        # Vitest-Tests
+npm run lint    # ESLint
+npm run build   # Produktionsbuild
+```
+
+Alle drei zusammen: `bash .github/skills/feature-umsetzen/scripts/pruefen.sh`.
+Details zum Verhalten stehen in [client/README.md](client/README.md).
+
 ## Server starten
+
 ```bash
 cd server
 npm install
 npm run dev
 ```
+
 Danach erreichbar unter http://localhost:3000.
 
 | Route                   | Antwort                     |
@@ -42,36 +91,69 @@ Danach erreichbar unter http://localhost:3000.
 | `GET /api/summary`      | Summe aller Beträge pro Kategorie in Cent, z. B. `{ "Salary": 100000, "Essen": 50000 }` |
 
 `/api/summary` addiert derzeit Einnahmen und Ausgaben je Kategorie und filtert
-noch nicht nach Zeitraum. Der geplante Ziel-Endpunkt steht in der Spezifikation.
+noch nicht nach Zeitraum. Frontend und Backend sind noch nicht verbunden; der
+geplante Ziel-Endpunkt steht in der Spezifikation.
 
 ## Übungen ausführen
+
 ```bash
 node lernen/ausgabe.js
 node lernen/array-methoden.mjs
 ```
 
-## Aufgaben
+## Arbeiten mit KI
 
-### Erledigt
-- [x] Ordner `client` und `server` anlegen
-- [x] `CLAUDE.md` und `.github/copilot-instructions.md` anlegen
-- [x] `server/` mit `npm init` initialisieren und Express installieren
-- [x] Ersten Express-Server in `server/src/index.js` schreiben
-- [x] Transaktions-Datenmodell im Backend anlegen (`server/src/daten.js`)
+FinTrack nutzt fünf Bausteine. Jeder beantwortet eine andere Frage:
 
-### Weiterer Plan
-Der aktuelle Umfang und die nächsten Phasen stehen ausschließlich in der
-[Spezifikation](docs/fintrack-spezifikation.md). Die obige Liste dokumentiert
-die ersten Einrichtungsschritte, nicht den vollständigen Implementierungsstand.
+| Baustein | Frage | Wann geladen? | In FinTrack |
+| --- | --- | --- | --- |
+| **Instructions** | Welche Regeln gelten **immer**? | automatisch bei jeder Anfrage | [copilot-instructions.md](.github/copilot-instructions.md), [CLAUDE.md](CLAUDE.md) |
+| **Spezifikation** | **Was** soll gebaut werden, wann ist es fertig? | wenn ein anderer Baustein darauf verweist | [fintrack-spezifikation.md](docs/fintrack-spezifikation.md) |
+| **Agent** | **Wer** arbeitet, mit welchen Rechten? | wenn er ausgewählt oder aufgerufen wird | [.github/agents/](.github/agents/) |
+| **Skill** | **Wie** läuft ein wiederkehrender Ablauf? | mit `/name` oder wenn die Beschreibung passt | [.github/skills/](.github/skills/) |
+| **Prompt** | Welcher **einzelne Auftrag** steht an? | mit `/name` | [.github/prompts/](.github/prompts/) |
 
-## Lernfortschritt
-Siehe [Lernlog](docs/lernen/LERNLOG.md).
+Kurz: Der **Prompt** sagt *was jetzt*, der **Agent** *wer*, der **Skill** *wie*,
+die **Spezifikation** *was richtig ist* und die **Instructions** *was immer gilt*.
+
+### Zusammenspiel an einem Beispiel
+
+Agent **FinTrack Frontend** auswählen und schreiben:
+`/feature-umsetzen Eine Kategorie, die noch benutzt wird, soll man nicht löschen können.`
+
+1. **Instructions:** Antwort auf Deutsch, Beträge in Cent, Änderungen begründen.
+2. **Agent:** darf Code in `client/` ändern, nicht im Server.
+3. **Skill:** gibt die Schritte vor – Spezifikation lesen, Fertig-Kriterien, umsetzen, testen, Doku.
+4. **Spezifikation:** liefert die genaue Regel und den Hinweistext.
+5. **Ergebnis:** Code und Tests; danach kann FinTrack QA gegen dieselbe Spezifikation prüfen.
+
+Der Agent bestimmt die Rechte, nicht der Skill: Nutzt FinTrack QA den Skill,
+darf er trotzdem keinen Code ändern.
+
+### Wann welchen Baustein hinzufügen?
+
+Nicht alle Bausteine sind Pflicht. Das Minimum sind **Instructions** und eine
+**Spezifikation**; der Rest kommt erst bei einem konkreten Bedarf dazu.
+
+| Signal | Baustein |
+| --- | --- |
+| Die KI vergisst eine allgemeine Regel. | Instructions |
+| Die KI rät, wie sich die App verhalten soll. | Spezifikation |
+| Ich schreibe denselben einzelnen Auftrag immer wieder. | Prompt |
+| Ich erkläre einen mehrstufigen Ablauf immer wieder, ggf. mit Vorlage oder Skript. | Skill |
+| Ich brauche eine Rolle mit anderen Rechten oder eine unabhängige Prüfung. | Agent |
+
+Faustregel: Wer der KI zum dritten Mal dasselbe erklärt, legt einen Prompt
+oder Skill an. Jede zusätzliche Datei muss gepflegt werden und darf anderen
+nicht widersprechen. Für ein kleines Projekt reichen meist zwei bis drei
+Agenten; FinTrack hat bewusst mehr, um die Werkzeuge zu lernen.
 
 ## Projektlokale Agenten
 
 Im Agenten-Auswahlmenü des VS-Code-Chats auswählen und einen konkreten Auftrag
-geben. Die Definitionen liegen in [.github/agents/](.github/agents/); sie starten
-nicht automatisch gemeinsam und ersetzen nicht die Entscheidung der Nutzerin.
+geben. Die Agenten starten nicht automatisch gemeinsam und dürfen keine weiteren
+Agenten aufrufen. Zusammenarbeit läuft über einen steuernden Chat; die
+Entscheidungen trifft die Nutzerin.
 
 | Agent | Aufgabe | Änderungen |
 | --- | --- | --- |
@@ -91,6 +173,25 @@ vollständige technische Sandbox, insbesondere bei Terminal- und Browserzugriff.
 Beispiel: „Nutze FinTrack QA, um Testfälle für das Bearbeiten von Transaktionen
 abzuleiten. Ändere keinen Code.“
 
-Skills werden erst bei wiederkehrendem Bedarf ergänzt. Externe Skills nicht
-blind installieren: Herkunft, Lizenz, Anweisungen, Skripte und benötigte
-Berechtigungen vorab prüfen. Aktuell wurden keine externen Skills übernommen.
+## Projektlokale Skills
+
+Skills sind wiederverwendbare Arbeitsabläufe („Rezepte“). Sie gehören nicht zu
+einem bestimmten Agenten; jeder Agent kann sie nutzen, behält aber seine
+eigenen Rechte. Aufruf mit `/` und dem Skill-Namen (sicher) oder automatisch,
+wenn die Beschreibung zur Aufgabe passt (die KI entscheidet selbst).
+
+| Skill | Zweck | Bestandteile |
+| --- | --- | --- |
+| [`feature-umsetzen`](.github/skills/feature-umsetzen/SKILL.md) | Feature spezifikationsgetrieben umsetzen: Fertig-Kriterien, Umsetzung, Tests, Doku | Ablauf, [Vorlage für Fertig-Kriterien](.github/skills/feature-umsetzen/assets/fertig-kriterien-vorlage.md), [Prüfskript](.github/skills/feature-umsetzen/scripts/pruefen.sh) (Test, Lint, Build) |
+
+Weitere Skills erst bei wiederkehrendem Bedarf ergänzen. Externe Skills, zum
+Beispiel von GitHub, nicht blind übernehmen: Herkunft, Lizenz, Anweisungen,
+Skripte und benötigte Berechtigungen vorab prüfen. Aktuell wurden keine
+externen Skills übernommen.
+
+## Gespeicherte Prompts
+
+| Prompt | Zweck |
+| --- | --- |
+| [`/lernlog`](.github/prompts/lernlog.prompt.md) | Abends Verständnisfragen stellen und einen Lernlog-Eintrag schreiben |
+| [`/fintrack-help`](.github/prompts/fintrack-help.prompt.md) | Allgemeine Hilfe bei FinTrack-Aufgaben nach den Projektregeln |

@@ -109,7 +109,7 @@ Offene Verständnisfragen aus dem Lern-Log (vom 24.09.):
 | 26.–30.10 | Formulare (kontrollierte Inputs)   | Neue Transaktion hinzufügen ✅ Meilenstein 01.11. |
 | 02.–06.11 | React Router                       | Übersicht, Transaktionen und Kategorien erreichbar; Login folgt im Januar |
 | 09.–13.11 | Dashboard + Recharts + Vitest      | Summen, Diagramm und vollständige Liste für einen gewählten Zeitraum; Berechnungen und Datumsfilter getestet |
-| 16.–20.11 | Kategorien-Seite, Tailwind, Puffer | Phase 1 fertig                                    |
+| 16.–20.11 | Kategorien-Seite, eigenes CSS (Entscheidung 23.10.: kein Tailwind), Puffer | Phase 1 fertig |
 
 ## Phase 2 – Backend ohne Login (23.11.–11.12.)
 
@@ -444,7 +444,7 @@ Wie geholfen wird:
 - Antworten auf Deutsch, Code/Fehlermeldungen auf Englisch
 - Bei Fehlern: Fehlermeldung zeigen und lesen lernen, nicht einfach reparieren
 
-Stack: Frontend React+Vite, React Router, TanStack Query, Tailwind, Recharts. Backend Node/Express/Zod. DB PostgreSQL+Prisma (lokal OrbStack). Tests Vitest, RTL, Supertest.
+Stack: Frontend React+Vite, React Router, TanStack Query, eigenes CSS (kein Tailwind, Entscheidung 23.10.2026), Recharts. Backend Node/Express/Zod. DB PostgreSQL+Prisma (lokal OrbStack). Tests Vitest, RTL, Supertest.
 
 Konventionen: JS ohne TS (kommt später), const als Standard/nie var, immer ===/!==, Arrow Functions für Callbacks, Geldbeträge als amountCents, Code englisch benennen/Kommentare deutsch, Ordner client/ server/ lernen/ docs/.
 
