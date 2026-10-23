@@ -5,14 +5,14 @@ agent: "agent"
 
 # Lern-Log-Eintrag für heute
 
-Schreibe einen kurzen Eintrag für heute in `lernen/LERNLOG.md`. Antworte auf Deutsch in sehr einfacher Sprache.
+Schreibe einen kurzen Eintrag für heute in `docs/lernen/LERNLOG.md`. Antworte auf Deutsch in sehr einfacher Sprache.
 
 ## Ablauf (in dieser Reihenfolge)
 
 1. Lies die Commits von heute mit `git log --since=midnight --format="%h %s"` und die Änderungen mit `git show --stat`.
 2. Stelle mir 2 bis 3 Verständnisfragen zu dem, was heute gemacht wurde. Warte auf meine Antworten. Schreibe noch nichts in die Datei.
 3. Prüfe meine Antworten. Wenn eine Antwort falsch oder unvollständig ist, erkläre es kurz und frage noch einmal.
-4. Erst danach: Hänge den Eintrag **am Ende** von `lernen/LERNLOG.md` an. Ändere bestehende Einträge nicht.
+4. Erst danach: Hänge den Eintrag **am Ende** von `docs/lernen/LERNLOG.md` an. Ändere bestehende Einträge nicht.
 
 ## Format des Eintrags
 

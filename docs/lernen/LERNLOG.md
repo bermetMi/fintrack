@@ -406,3 +406,254 @@ Noch offen
 
 **Commit:** 6fc0139 (refactor: lift transactions state to App, move form to Transactions page)
 **Morgen:** Mi 21.10: Wiederholen (Props: Komma/Leerzeichen, `useState` gegen `let`), dann Formular festigen (Meilenstein 01.11.: neue Transaktion hinzufügen ist erreicht, jetzt Validierung ohne `alert`?)
+
+## Mi 21.10.2026 (nachgetragen Do 22.10.) – Phase 1: Seiten-Gerüste, Fehleranzeige, Lern-Log-Prompt
+
+Am Mittwoch habe ich die Seiten `Categories`, `Stats` und `Settings` als Gerüst angelegt und in `App.jsx` als Routen eingebunden. Die Formular-Fehler zeige ich jetzt über einen `error`-State statt mit `alert` an. Außerdem habe ich die Anweisungen in `.github/prompts/lernlog.prompt.md` geschrieben.
+
+**Verstanden (in eigenen Worten):** nicht erfasst, am Mittwoch gab es keine Fragerunde.
+
+**Commit:** 0688dda (erst am Do 22.10. committet und gepusht, zusammen mit dem Eintrag unten)
+**Morgen:** Do 22.10: Wiederholen (Props, `useState` gegen `let`), `onDelete` aufräumen
+
+## Do 22.10.2026 – Phase 1: onDelete mit id, filter, Props
+
+Heute habe ich `handleDelete(id)` in `Home.jsx` geschrieben, damit `TransactionItem` nur noch `onDelete(id)` aufruft und die Liste nicht mehr kennen muss. Grammatik Do: Konjunktiv II und Conditional Type 2, alle 3 Aufgaben richtig.
+
+**Verstanden (in eigenen Worten):** `filter` braucht als Argument eine Regel (Funktion), damit es für jedes Element entscheidet, ob es in die neue Liste kommt oder nicht.
+
+**Noch unklar:**
+
+- `t.id !== undefined` bleibt immer wahr, deshalb löscht `onDelete()` ohne `id` nichts (nur mit Hilfe verstanden)
+- Props im JSX nur mit Leerzeichen, nie mit Komma; Komma steht in Arrays, Objekten und Parameterlisten (nicht wegen `useState`)
+- Senden (`<Home a={a} />`) und Empfangen (`function Home({ a })`) von Props auseinanderhalten
+
+**Offen**
+
+- [ ] Die 3 Fragen aus `/lernlog` beantworten: Vorteil von `onDelete(id)`, `error` als State mit "Neuzeichnen", `handleDelete` gegen `handleDelete()`
+- [ ] Warum `useState` und nicht `let`: in einem Satz mit "Neuzeichnen" erklären
+- [ ] Lern-Log-Eintrag von Fr 16.10. und Rückblick So 11.10. fehlen
+- [ ] Destructuring in eigenen Worten (offen seit 14.10.)
+
+**Commit:** 0688dda (refactor: onDelete takes id, add page stubs, show form errors in UI)
+
+## Fr 23.10.2026 – Phase 1: Korrekturen aus dem Frontend-Review
+
+Copilot hat beim Umbenennen von Kategorien auch die Zuordnung vorhandener Transaktionen aktualisiert, damit Budget- und Statistikwerte erhalten bleiben. Das Formular verhindert jetzt das Speichern ohne passende Kategorie; die Berechnungen verarbeiten auch Namen wie `constructor` und `__proto__` korrekt. Die Euro-Eingaberegel ist noch offen und wurde in diesem Schritt nicht verändert.
+
+**Geprüft:** ESLint und Produktionsbuild erfolgreich (Hinweis auf großes Bundle); Rechenproben für normale und besondere Kategorien erfolgreich. Im Browser blieb beim Umbenennen die Budgetanzeige bei 50,00 € von 300,00 €, und die Transaktion erhielt den neuen Namen; Speichern ohne Einnahmekategorie zeigte eine Fehlermeldung und fügte keine Transaktion hinzu.
+
+**Weiter umgesetzt: Transaktionsdatum**
+
+- Copilot hat ein Pflichtfeld für das Transaktionsdatum ergänzt. Es wird als
+  `YYYY-MM-DD` ohne Uhrzeit im React-State gespeichert und als `DD.MM.YYYY` in
+  der Liste angezeigt; auch die Fake-Daten haben jetzt ein Datum.
+- Das Datumsfeld startet leer und wird nach erfolgreichem Hinzufügen geleert.
+  Fehlende oder ungültige Kalenderdaten zeigen eine Fehlermeldung.
+- Im Browser geprüft: fehlendes Datum, ungültige Daten einschließlich 29.02.2026,
+  gültiger Schalttag 29.02.2024, Anzeige, Zurücksetzen des Formulars sowie
+  Hinzufügen/Löschen mit unveränderten Einnahmen- und Ausgabenberechnungen.
+  ESLint und Produktionsbuild erfolgreich; die Bundle-Größenwarnung bleibt.
+- Zu diesem Zeitpunkt noch offen: Zeitraumfilter und monatliche Budgetberechnung. Das Datum allein
+  filtert noch keine Daten. Speicherung bleibt vorerst nur im React-State.
+
+**Weiter umgesetzt: Zeitraumfilter und Transaktionsliste**
+
+- Nutzerin hat den Datumsschritt selbst getestet und als funktionierend bestätigt.
+- Variante 1 gewählt: anfangs alle Transaktionen, ohne Zeitbegrenzung. Ein gültiger
+  Von-bis-Zeitraum gilt inklusive beider Tage für Übersicht, Statistik und Liste;
+  der Zeitraum bleibt bei Seitenwechseln erhalten und lässt sich zurücksetzen.
+- Copilot hat die vollständige Liste auf der Transaktionsseite und einen separaten
+  Kategoriefilter ergänzt. Ungültige oder unvollständige Zeiträume zeigen einen
+  Fehler statt irreführender Ergebnisse; leere Treffer ergeben leere Listen,
+  Summen von 0 und einen Hinweis statt Diagrammen.
+- Löschen und Hinzufügen ändern weiterhin die vollständigen Daten, nicht nur den
+  sichtbaren Ausschnitt. Die gemeinsame Datumsprüfung wird auch im Formular genutzt.
+- Vitest und React Testing Library eingerichtet: 26 Tests erfolgreich, darunter
+  mehr als fünf Einträge, inklusive Datumsgrenzen, Schaltjahre, Kategorien,
+  Seitenwechsel, leere Treffer und Erhalt ausgeblendeter Daten. ESLint und Build
+  erfolgreich (bestehende Bundle-Größenwarnung). Der Browser-Test war durch
+  Interaktionen und Tool-Beschränkungen nicht zuverlässig abschließbar; die
+  Oberflächenprüfungen liefen automatisiert mit jsdom, nicht als vollständige Browser-Tests.
+- Noch offen: Monatsbudgets, Bearbeiten bestehender Transaktionen und die weiteren
+  Frontend-Punkte aus der Spezifikation. Daten und Filter sind weiterhin nur im React-State.
+
+**Vereinfacht nach Rückmeldung der Nutzerin**
+
+- Die Transaktionsseite dient jetzt ausschließlich der Eingabe. Liste,
+  Zeitraumfilter und Kategoriefilter wurden dort wieder entfernt.
+- Nach dem Speichern erscheint eine Bestätigung für Ausgabe oder Einnahme und
+  der Link „In Übersicht ansehen“. Er entfernt die Zeitbegrenzung beim Öffnen der
+  Übersicht, damit der neue Eintrag sichtbar ist; darauf weist die Oberfläche hin.
+- Die Liste steht nur noch in der Übersicht und heißt „Alle Transaktionen“.
+  Zeitraumfilter bleiben auf Übersicht und Statistik; normales Navigieren
+  verändert den Zeitraum nicht. Spezifikation und Tests wurden angepasst.
+
+**Verstanden (in eigenen Worten):** Für die neuen Implementierungen noch nicht geprüft.
+
+**Weitere Vereinfachung: drei Hauptseiten**
+
+- Nutzerin hat Übersicht, Transaktionen (Eingabe) und Kategorien als Navigation
+  bestätigt. Das Ausgaben-Kategoriediagramm wurde in die Übersicht verschoben;
+  die separate Statistikseite und das doppelte Summen-Balkendiagramm entfallen.
+- Ein Zeitraum steuert dort Summen, Diagramm und Liste. Der Rücksetzbutton heißt
+  jetzt „Zeitraum zurücksetzen“, die Listenüberschrift „Transaktionen“.
+- Alte Links auf `/stats` leiten zur Übersicht weiter. Der Lernplan nennt jetzt
+  drei Hauptseiten statt fünf; Login/Registrierung bleibt für Januar geplant.
+- Geprüft: 29 automatisierte Tests erfolgreich, darunter Navigation,
+  Weiterleitung und gemeinsames Filtern von Liste und Kategoriediagramm.
+  ESLint und Build erfolgreich; die neue Übersicht ist auch im Browser sichtbar.
+
+**UI-Review und Monatsbudgets**
+
+- Übersicht neu angeordnet: Summen direkt unter der Überschrift, danach der
+  Zeitraumfilter; Diagramm und Liste ab 900 px nebeneinander mit 24 px Abstand
+  zum Filter. Mobile Transaktionen zeigen Details über Betrag und Löschaktion.
+- Projektlokalen UI-Reviewer angelegt. Nach dem Review wurden permanente
+  Kategorie-Beträge, eindeutig benannte Löschbuttons und semantische Listen
+  ergänzt. Die Nutzerin hat die Anpassungen positiv bestätigt.
+- Monatsbudgets werden jetzt pro Ausgabenkategorie und Kalendermonat berechnet,
+  ohne Übertrag. Die Kategorienseite hat einen Monatswähler, initial für den
+  aktuellen lokalen Monat, mit Verbrauch und Restbudget beziehungsweise
+  Überschreitung. Die Monatsauswahl ist unabhängig vom Übersichtsfilter.
+- Nutzerin hat ausdrücklich gewählt: Budgetwarnungen prüfen ganze vom Zeitraum
+  berührte Kalendermonate; Liste, Summen und Diagramm bleiben tagesgenau.
+  Die Übersicht erklärt diesen Unterschied neben den Budgetwarnungen.
+- Geprüft: 36 automatisierte Tests erfolgreich. Darunter Oktober 350 € gegen
+  300 € und November 200 € gegen 300 €, Teilmonate, Jahresgrenzen, Schalttag,
+  Nullbudgets, Monate ohne Ausgaben, ungültige Auswahl und Löschen.
+  ESLint und Build erfolgreich; bestehende Bundle-Größenwarnung bleibt.
+- Im separaten Browser-Testtab bestätigt: getrennte Oktober-/November-Anzeige,
+  Oktoberwarnung bei leerer Tagesauswahl sowie mobile Budgetdarstellung.
+  Keine Änderung an den Daten der bereits geteilten Browserseite.
+- Noch offen: Budgets ändern, Transaktionen bearbeiten und weitere
+  Eingabevalidierung. Daten bleiben nur im React-State, nicht dauerhaft gespeichert.
+- Verständnis der neuen Berechnung wurde noch nicht in eigenen Worten geprüft.
+
+**Anschließende Entscheidung: Budgets vorerst entfernen**
+
+- Nutzerin möchte die App aus Nutzersicht einfacher halten und aktuell keine
+  Budgetfunktion. Diese Entscheidung ersetzt die oben dokumentierte Budgetplanung.
+- Budgetfelder, Monatswähler, Verbrauchsanzeigen, Warnungen und zugehörige
+  Berechnungen wurden entfernt, einschließlich der ursprünglichen Budgetanzeige.
+  Kategorien dienen nur noch dem Gruppieren von Einnahmen und Ausgaben.
+- Transaktionsdatum, Zeitraumfilter, Summen, Diagramm, Kategorieverwaltung und
+  die UI-/Barrierefreiheitsverbesserungen bleiben erhalten.
+- Spezifikation und README aktualisiert: Budgets sind nur noch eine mögliche
+  spätere Erweiterung, kein nächster Umsetzungsschritt.
+- Geprüft: 31 Tests, ESLint und Build erfolgreich; die bekannte
+  Bundle-Größenwarnung bleibt. Kategorienseite und Übersicht im Browser ohne
+  Budgetoberfläche bestätigt. Kategorie-Umbenennen erhält die Zuordnung der
+  vorhandenen Transaktionen.
+
+**Weiter umgesetzt: Transaktionen bearbeiten**
+
+- Nutzerin hat „Bearbeiten“ neben „Löschen“ beauftragt. In der Übersicht öffnet
+  sich ein vorausgefülltes Formular, ohne zusätzliche Hauptseite.
+- Anlegen und Bearbeiten verwenden dieselbe Formular-Komponente. Notiz, Datum,
+  Betrag, Typ und Kategorie sind änderbar; Speichern behält die ID bei und
+  aktualisiert die vollständigen Daten. Abbrechen verwirft nur den Entwurf.
+- Der Zeitraum bleibt erhalten. Wenn das geänderte Datum außerhalb liegt,
+  erklärt die Speicherbestätigung, warum der Eintrag nicht mehr sichtbar ist.
+- Ungültige Eingaben ändern keine gespeicherten Werte. Gelöschte Kategorien
+  erfordern eine neue Zuordnung; inzwischen gelöschte Transaktionen werden
+  nicht versehentlich neu angelegt. Beträge werden beim Speichern als positive,
+  sichere Integer geprüft, reine Leerzeichen als Notiz abgelehnt.
+- Fokus geht beim Öffnen ins Formular und beim Schließen zurück zum Auslöser
+  oder zur Überschrift, falls der Eintrag aus der Auswahl verschwunden ist.
+- Geprüft: 38 automatisierte Tests, ESLint und Produktionsbuild erfolgreich.
+  Browser-Gesamtablauf nicht zuverlässig abschließbar, da der Testtab während
+  der Prüfung verändert beziehungsweise geschlossen wurde. Die bekannte
+  Bundle-Größenwarnung bleibt.
+- Noch offen: Textlängenlimits und spätere dauerhafte
+  Speicherung. Verständnis der Implementierung noch nicht geprüft.
+
+**Entscheidung: Euro-Umrechner flexibel lassen**
+
+- Nutzerin möchte die bestehende flexible Eingabe behalten: ganze Euro-Beträge,
+  Punkt oder Komma und ein oder zwei Nachkommastellen.
+- In eigenen Worten erklärt: `25.5` ergibt korrekt `2550` Cent; „Übernehmen“
+  überträgt diesen Betrag. Diese Flexibilität ist aus Nutzersicht gewünscht.
+- Spezifikation aktualisiert; keine Änderung am Anwendungscode.
+
+**Weiter umgesetzt: Textlängenlimits**
+
+- Nutzerin hat maximal 200 Zeichen für Notizen und 50 Zeichen für Kategorienamen
+  bestätigt. Grenzen gelten beim Anlegen, Bearbeiten und Umbenennen.
+- Zeichenzähler ergänzt. Zu lange Eingaben bleiben erhalten, zeigen beim
+  Speichern eine Fehlermeldung und verändern keine gespeicherten Daten.
+  Es wird kein Text automatisch abgeschnitten.
+- Fehler beim Kategorie-Umbenennen erscheinen direkt beim Bearbeitungsfeld.
+  Die flexible Euro-Eingabe bleibt unverändert.
+- Geprüft: 28 React-Integrationstests erfolgreich, inklusive neuer Grenzfälle
+  199/200/201 und 49/50/51 sowie Korrektur und unveränderter Zuordnung bei
+  abgelehntem Umbenennen. ESLint und Build erfolgreich; die bekannte
+  Bundle-Größenwarnung bleibt. Kein zusätzlicher Browser-Test in diesem Schritt.
+- Spezifikation und README aktualisiert. Verständnis der Implementierung
+  noch nicht in eigenen Worten geprüft.
+
+**Anpassung der Textgrenzen**
+
+- Auf Wunsch der Nutzerin gelten jetzt maximal 100 Zeichen für Notizen und
+  40 Zeichen für Kategorienamen. Dies ersetzt die zuvor gewählten 200/50.
+- Zähler und Fehlermeldungen verwenden die neuen Grenzen. Spezifikation,
+  README und Grenzwerttests (99/100/101 sowie 39/40/41) angepasst.
+- Geprüft: 28 React-Integrationstests, ESLint und Build erfolgreich; bekannte
+  Bundle-Größenwarnung unverändert.
+
+- Nutzerin bestätigt nach Aufforderung zum Ausprobieren von Bearbeiten,
+  Speichern und Abbrechen: „es funktioniert“. Das ist eine Funktionsbestätigung,
+  keine Bestätigung des Codeverständnisses.
+
+**Projektorganisation und spezialisierte Agenten**
+
+- Auf Wunsch der Nutzerin liegen Produktspezifikation und Lernlog jetzt unter
+  `docs/fintrack-spezifikation.md` und `docs/lernen/LERNLOG.md`. Übungen bleiben
+  unter `lernen/`. Verweise in README, Anweisungen, Prompts und UI-Agent angepasst.
+- Projektlokale Agenten für Frontend, Backend, Architektur, Product Owner und QA
+  ergänzen den UI-Reviewer. Frontend und Backend setzen beauftragte Änderungen um;
+  Architektur, Product Owner und QA prüfen beziehungsweise beraten.
+- Keine externen Skills installiert. Weitere Skills erst bei konkretem Bedarf
+  auswählen und vor einer Übernahme Inhalt, Berechtigungen und Lizenz prüfen.
+- Die Agentenkonfigurationen sind noch keine ausgeführten Fachreviews und
+  belegen kein Verständnis der jeweiligen Rollen.
+
+**Aufräumen nach Architektur-Review**
+
+- Der Architektur-Agent hat die Struktur als passend für die aktuelle Phase
+  bewertet und vier kleine Aufräumpunkte genannt; alle wurden umgesetzt.
+- `server/src/test.js` war eine Übung, kein automatisierter Test. Sie liegt jetzt
+  als `lernen/array-methoden.mjs` bei den Übungen; der Importpfad wurde angepasst.
+- Vite-Vorlagentext mit TypeScript-Empfehlung aus `client/README.md` entfernt.
+  Das Haupt-README nennt jetzt `/api/summary` und `berechnungen.js`.
+- Die KI-Anweisungen verweisen beim gültigen Plan ausdrücklich auf
+  `docs/fintrack-spezifikation.md` (CLAUDE.md und copilot-instructions.md synchron).
+- Geprüft: verschobene Übung läuft; `/api/summary`-Beispiel aus den echten
+  Beispieldaten berechnet. Offen für später: Datenwerte von Client und Server
+  (`income`/`INCOME`, `Salary`/`Gehalt`) vor der Verbindung angleichen.
+
+**Abgleich Umsetzung ↔ Spezifikation (Product Owner)**
+
+- Der Product-Owner-Agent hat Code und Tests mit der Spezifikation verglichen:
+  Phase 1 ist fast vollständig umgesetzt. Keine Browser- oder Nutzerabnahme.
+- Alle offenen Punkte stehen jetzt als Checkliste in der Spezifikation unter
+  „Offene Punkte aus dem Abgleich Code ↔ Spezifikation“: U1–U3 (Code),
+  E1–E4 (Entscheidungen der Nutzerin), K1–K4 (Textkorrekturen), V1 (Phase 2).
+- Nichts davon ist bisher entschieden oder umgesetzt.
+
+**Frontend Phase 1 abgeschlossen**
+
+- Nutzerin hat entschieden: Notiz bleibt Pflicht (E1), Kategorien behalten einen
+  Typ Ausgabe/Einnahme (E2), verwendete Kategorien lassen sich nicht löschen (E3),
+  die dritte Summenkarte heißt „Differenz“ statt „Saldo“ (E4). Den „Kopieren“-Button
+  im Euro-Umrechner hat sie entfernen lassen; nur „Übernehmen“ bleibt (U2).
+- Umgesetzt: Hinweis „Diese Kategorie wird noch von 1 Transaktion verwendet.“ statt
+  Löschen; Beschriftung „Differenz“; Umrechner rechnet mit BigInt und lehnt Beträge
+  ab, die keine sichere ganze Cent-Zahl ergeben (U3); Test für HTML-artige Notizen (U1).
+- Spezifikation: Abgleichsliste abgehakt, Datenmodell (`note` Pflicht, `Category.type`),
+  13 API-Endpunkte, Statuscodes 409/413, `/stats`-Weiterleitung und Zeitpunkt der
+  KI-Funktion korrigiert. Offen bleibt nur V1 (Datenwerte angleichen, Phase 2).
+- Geprüft: 53 automatisierte Tests, ESLint und Build erfolgreich; bekannte
+  Bundle-Größenwarnung bleibt. Verständnis der neuen Umsetzung noch nicht geprüft.
+
+**Commit:** noch nicht committet

@@ -1,5 +1,4 @@
-
-import { transactions } from "./daten.js";
+import { transactions } from "../server/src/daten.js";
 
 const food = transactions.filter((t) => t.category === "Essen");
 console.log(food);

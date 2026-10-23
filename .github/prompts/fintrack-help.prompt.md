@@ -7,7 +7,8 @@ description: "Help with Fintrack development tasks"
 When helping with FinTrack:
 
 - Always explain in German (if user writes German)
-- Follow the FinTrack plan (client/, server/, lernen/)
+- Follow the authoritative plan in `docs/fintrack-spezifikation.md` and the current
+  learning status in `docs/lernen/LERNLOG.md` (code in client/, server/, lernen/)
 - For money amounts: always use amountCents (Cent, not Euro)
 - No TypeScript yet (plain JavaScript)
 - Every change should include a reason why

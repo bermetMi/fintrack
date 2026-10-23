@@ -1,59 +1,45 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { EXPENSE } from "../calculations";
+import TransactionForm from "../TransactionForm";
 
-export default function Transactions({ transactions, setTransactions }) {
-  const [note, setNote] = useState("");
-  const [amount, setAmount] = useState("");
-  const [category, setCategory] = useState("Essen");
-  const categories = ["Essen", "Transport", "Salary", "Entertainment"];
-  const [error, setError] = useState("");
+export default function Transactions({ setTransactions, categories, setDateRange }) {
+  const [notice, setNotice] = useState("");
 
-  const handleAddTransaction = () => {
-    if (!note || !amount) {
-      setError("Bitte alle Felder ausfüllen!");
-      return;
-    }
-
-    const amountNumber = parseInt(amount);
-    if (isNaN(amountNumber) || amountNumber <= 0) {
-      setError("Betrag muss eine positive Zahl sein!");
-      return;
-    }
-
-    const newTransaction = {
-      id: Date.now(),
-      note: note,
-      amountCents: amountNumber,
-      category: category,
-    };
-
-    setTransactions([...transactions, newTransaction]);
-    setNote("");
-    setAmount("");
-    setCategory("Essen");
-    setError("");
+  const handleAdd = (values) => {
+    const newTransaction = { ...values, id: Date.now() };
+    setTransactions((current) => [...current, newTransaction]);
+    setNotice(values.type === EXPENSE
+      ? "Ausgabe gespeichert. Du findest sie auf der Seite Übersicht."
+      : "Einnahme gespeichert. Du findest sie auf der Seite Übersicht.");
   };
 
   return (
-    <div>
-      <input
-        placeholder="Note"
-        value={note}
-        onChange={(e) => setNote(e.target.value)}
-      />
-      <input
-        placeholder="Amount (cents)"
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-      />
-      <select value={category} onChange={(e) => setCategory(e.target.value)}>
-        {categories.map((cat) => (
-          <option key={cat} value={cat}>
-            {cat}
-          </option>
-        ))}
-      </select>
-      <button onClick={handleAddTransaction}>Add</button>
-      {error && <p>{error}</p>}
-    </div>
+    <>
+      <div className="page__header">
+        <h1>Transaktionen</h1>
+        <p className="page__subtitle">Neue Transaktion erfassen</p>
+      </div>
+      <div className="card">
+        <TransactionForm
+          categories={categories}
+          onSave={handleAdd}
+          onSubmitStart={() => setNotice("")}
+        />
+        {notice && (
+          <div className="transaction-confirmation" role="status">
+            <p>{notice}</p>
+            <Link
+              className="btn btn--ghost"
+              to="/"
+              onClick={() => setDateRange({ from: "", to: "" })}
+            >
+              In Übersicht ansehen
+            </Link>
+            <p className="field__hint">Zeigt alle Transaktionen ohne Zeitraumfilter.</p>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
