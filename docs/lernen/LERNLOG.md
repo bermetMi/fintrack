@@ -656,4 +656,4 @@ Copilot hat beim Umbenennen von Kategorien auch die Zuordnung vorhandener Transa
 - Geprüft: 53 automatisierte Tests, ESLint und Build erfolgreich; bekannte
   Bundle-Größenwarnung bleibt. Verständnis der neuen Umsetzung noch nicht geprüft.
 
-**Commit:** noch nicht committet
+**Commit:** `3338825` (Frontend Phase 1 abgeschlossen, Agenten, Doku unter `docs/`); noch nicht gepusht
