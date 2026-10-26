@@ -253,6 +253,20 @@ offen bleibt nur V1 für Phase 2.
 - [ ] **V1 – Datenwerte angleichen:** Server nutzt `income`/`expense` und `Salary`,
   der Client `INCOME`/`EXPENSE` und `Gehalt`. Gemeinsame Schreibweise festlegen.
   `/api/summary` zählt derzeit Einnahmen und Ausgaben je Kategorie zusammen.
+  **Entscheidung 26.10.2026:** Der Server passt sich dem Client an (`INCOME`/`EXPENSE`,
+  `Gehalt`/`Essen`/`Transport`), der Client bleibt unverändert. `/api/summary`
+  liefert vorerst nur die Ausgabensummen je Kategorie in Cent, ohne Datumsfilter;
+  Einnahmen und Differenz kommen in Phase 2.
+  **Stand 26.10.2026:** Code in `server/src/daten.js` und `berechnungen.js` angepasst
+  und von Hand geprüft. Server-Tests fehlen noch, deshalb bleibt V1 offen.
+
+  Fertig fürs Abhaken, wenn:
+  1. `GET /api/transactions`: id 1 = `INCOME`/`Gehalt`, id 2 = `EXPENSE`/`Essen`,
+     id 3 = `EXPENSE`/`Transport`.
+  2. Jeder `type` ist genau `"INCOME"` oder `"EXPENSE"`, jede `category` kommt in
+     der Kategorienliste des Clients vor.
+  3. `GET /api/summary` liefert `{ "Essen": 50000, "Transport": 20000 }`, ohne „Gehalt“.
+  4. Ohne Ausgaben liefert `/api/summary` `{}`.
 
 ---
 

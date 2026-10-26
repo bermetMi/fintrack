@@ -679,3 +679,39 @@ Copilot hat beim Umbenennen von Kategorien auch die Zuordnung vorhandener Transa
   Prüfskript ausgeführt (53 Tests, Lint und Build erfolgreich). Der Skill wurde
   noch nicht in einem echten Feature-Auftrag eingesetzt.
 - Verstanden (in eigenen Worten): noch nicht geprüft.
+
+## Mo 26.10.2026 – Phase 1: Verständnis `useState`, Props, Destructuring
+
+Heute habe ich das Frontend in eigenen Worten wiederholt, statt neuen Code zu bauen. Ich habe `useState` gegen `let`, Props senden/empfangen und Destructuring an `TransactionForm.jsx` besprochen.
+
+**Verstanden (in eigenen Worten):**
+
+- `useState` gegen `let`: Mit `setCount(count + 1)` ändert sich der Wert und React zeichnet neu (re-render), deshalb sehe ich ihn auf dem Bildschirm. Bei `let` ändert sich der Wert nur im Speicher, React erfährt nichts davon und zeigt nichts Neues.
+- Props: Die Eltern-Komponente sendet (`<TransactionItem note={note} />`), die Kind-Komponente empfängt (`function TransactionItem({ note })`).
+- Destructuring: Es packt Werte aus einem Objekt (`{ note, amountCents }`) oder Array (`[note, setNote]`) aus und gibt ihnen eigene Namen.
+- `useState("")` gibt den aktuellen Wert und die Funktion zum Ändern zurück; `""` ist der Startwert.
+
+**Noch unklar:**
+
+- Kontrolliertes Eingabefeld: `value={note}` zeigt nur an, `onChange` mit `setNote` speichert die Eingabe. Ohne `onChange` nimmt das Feld keinen Text an (Antwort war nur teilweise richtig).
+- Fehlerhafte Annahme korrigiert: `useState` liefert keine „alten und neuen Zustände“, sondern den aktuellen Wert und eine Setter-Funktion.
+- Eckige Klammern (Array bei `useState`) gegen geschweifte Klammern (Objekt bei Props) noch nicht abgefragt.
+
+**Offen**
+
+- [x] Grammatik Montag (Gegenwart): erledigt, Formen richtig gewählt, nur Endungen und Hilfsverben fehlten (`writes`, `is running`, `the test`)
+- [ ] V1: Server-Tests mit `node --test` schreiben (Kriterien 1 bis 4), Prüfskript um Server-Tests ergänzen, dann V1 in der Spezifikation abhaken
+- [ ] Die 3 Fragen aus `/lernlog` vom 22.10. (Vorteil von `onDelete(id)`, `error` als State, `handleDelete` gegen `handleDelete()`)
+- [ ] Lern-Log-Eintrag von Fr 16.10. und Rückblick So 11.10. fehlen
+- [ ] Fragen von heute noch offen: Unterschied `=` gegen `===`; warum der Server und nicht der Client angepasst wird
+
+**Umgesetzt: V1 (Datenwerte angleichen), Code fertig, Tests offen**
+
+- Mit dem Skill `feature-umsetzen` gestartet. Entscheidung: Der Server passt sich dem Client an, der Client bleibt unverändert. Fertig-Kriterien und Entscheidung stehen mit Datum in der Spezifikation.
+- Ich habe `server/src/daten.js` selbst angepasst: `type` heißt jetzt `"INCOME"`/`"EXPENSE"`, die Kategorien `Gehalt`, `Essen`, `Transport`.
+- Ich habe `sumByCategory` in `server/src/berechnungen.js` selbst mit `filter` auf `type === "EXPENSE"` ergänzt. `/api/summary` liefert jetzt `{"Essen":50000,"Transport":20000}`. Bei den Versuchen habe ich eine `ReferenceError` gelesen (Ursache: `=` statt `===` und fehlender Parameter) und die Namen in der Filter-Regel angeglichen.
+- Geprüft von Hand mit echten Daten und mit leerer Liste (`{}`). Noch keine automatisierten Server-Tests, deshalb bleibt V1 offen.
+- Dieser Schritt hat Frontend und Backend nicht verbunden: Der Client ruft den Server noch nicht auf. Das kommt am 14. bis 18.12.
+
+**Commit:** noch nicht committet
+**Morgen:** Di 27.10: kontrolliertes Eingabefeld wiederholen, dann die Server-Tests für V1 schreiben
