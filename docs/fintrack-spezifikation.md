@@ -102,14 +102,14 @@ Offene Verständnisfragen aus dem Lern-Log (vom 24.09.):
 
 ## Phase 1 – Frontend mit Fake-Daten (12.10.–20.11.)
 
-| Woche     | Thema                              | Fertig, wenn ...                                  |
-| --------- | ---------------------------------- | ------------------------------------------------- |
-| 12.–16.10 | Vite, JSX, Komponenten, Props      | Transaktionsliste zeigt Fake-Daten                |
-| 19.–23.10 | useState, Events, Listen mit key   | Löschen-Button entfernt einen Eintrag             |
-| 26.–30.10 | Formulare (kontrollierte Inputs)   | Neue Transaktion hinzufügen ✅ Meilenstein 01.11. |
-| 02.–06.11 | React Router                       | Übersicht, Transaktionen und Kategorien erreichbar; Login folgt im Januar |
-| 09.–13.11 | Dashboard + Recharts + Vitest      | Summen, Diagramm und vollständige Liste für einen gewählten Zeitraum; Berechnungen und Datumsfilter getestet |
-| 16.–20.11 | Kategorien-Seite, eigenes CSS (Entscheidung 23.10.: kein Tailwind), Puffer | Phase 1 fertig |
+| Woche     | Thema                                                                      | Fertig, wenn ...                                                                                             |
+| --------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| 12.–16.10 | Vite, JSX, Komponenten, Props                                              | Transaktionsliste zeigt Fake-Daten                                                                           |
+| 19.–23.10 | useState, Events, Listen mit key                                           | Löschen-Button entfernt einen Eintrag                                                                        |
+| 26.–30.10 | Formulare (kontrollierte Inputs)                                           | Neue Transaktion hinzufügen ✅ Meilenstein 01.11.                                                            |
+| 02.–06.11 | React Router                                                               | Übersicht, Transaktionen und Kategorien erreichbar; Login folgt im Januar                                    |
+| 09.–13.11 | Dashboard + Recharts + Vitest                                              | Summen, Diagramm und vollständige Liste für einen gewählten Zeitraum; Berechnungen und Datumsfilter getestet |
+| 16.–20.11 | Kategorien-Seite, eigenes CSS (Entscheidung 23.10.: kein Tailwind), Puffer | Phase 1 fertig                                                                                               |
 
 ## Phase 2 – Backend ohne Login (23.11.–11.12.)
 
@@ -150,13 +150,13 @@ Frontend-Demo darf nur Fake-Daten verwenden und keinen ungeschützten Backend-Zu
 ### Phase 1: sichere Formulare und Darstellung
 
 - [ ] Eingaben vollständig prüfen: Betrag als positive, sicher darstellbare ganze
-  Cent-Zahl (`Number.isSafeInteger`), passende Kategorie und begrenzte Textlängen.
-  Textgrenzen: Notiz maximal 100 Zeichen, Kategoriename maximal 40 Zeichen.
-  Diese Grenzen später auch serverseitig übernehmen.
+      Cent-Zahl (`Number.isSafeInteger`), passende Kategorie und begrenzte Textlängen.
+      Textgrenzen: Notiz maximal 100 Zeichen, Kategoriename maximal 40 Zeichen.
+      Diese Grenzen später auch serverseitig übernehmen.
 - [ ] Nutzereingaben als Text anzeigen, nicht als HTML interpretieren
-  (`dangerouslySetInnerHTML` nicht für Notizen oder Kategorien verwenden).
+      (`dangerouslySetInnerHTML` nicht für Notizen oder Kategorien verwenden).
 - [ ] Keine Passwörter, API-Schlüssel oder echten Finanzdaten im Frontend, Repository
-  oder KI-Chat. `VITE_*`-Variablen sind öffentlich im Browser, auch wenn sie aus `.env` kommen.
+      oder KI-Chat. `VITE_*`-Variablen sind öffentlich im Browser, auch wenn sie aus `.env` kommen.
 - **Fertig, wenn:** Tests ungültige Beträge und zu lange Texte ablehnen, HTML-artige
   Notizen nur als Text erscheinen und ich erklären kann, warum Frontend-Prüfungen
   allein keine API schützen.
@@ -164,26 +164,26 @@ Frontend-Demo darf nur Fake-Daten verwenden und keinen ungeschützten Backend-Zu
 ### Phase 2: Backend und Datenbank
 
 - [ ] Jede Anfrage serverseitig mit Zod prüfen, auch wenn das Formular bereits
-  validiert. Erlaubte Felder ausdrücklich übernehmen; Größenlimits für JSON-Anfragen setzen.
+      validiert. Erlaubte Felder ausdrücklich übernehmen; Größenlimits für JSON-Anfragen setzen.
 - [ ] Prisma-Abfragen mit Parametern verwenden, keine SQL-Befehle aus Nutzereingaben
-  zusammenbauen. Geldbeträge zusätzlich gegen den Wertebereich des Datenbankfelds prüfen.
+      zusammenbauen. Geldbeträge zusätzlich gegen den Wertebereich des Datenbankfelds prüfen.
 - [ ] Fehler mit passenden Statuscodes beantworten, keine internen Stacktraces,
-  Zugangsdaten oder vollständigen Finanzdaten an Clients oder in Logs ausgeben.
+      Zugangsdaten oder vollständigen Finanzdaten an Clients oder in Logs ausgeben.
 - **Fertig, wenn:** Supertest auch direkte Anfragen ohne Formular prüft:
   ungültige Daten werden mit 400, zu große Anfragen mit 413 abgelehnt und nicht gespeichert.
 
 ### Verbindung und Login (Dezember bis 15.01.)
 
 - [ ] CORS nur für vorgesehene Frontend-Ursprünge konfigurieren; CORS ersetzt
-  weder Login noch Berechtigungsprüfung.
+      weder Login noch Berechtigungsprüfung.
 - [ ] Passwörter mit bcrypt hashen. Anmeldung gegen massenhafte Versuche begrenzen;
-  Fehlermeldungen verraten nicht, ob ein Konto existiert.
+      Fehlermeldungen verraten nicht, ob ein Konto existiert.
 - [ ] Login-Cookies in Produktion mit `HttpOnly`, `Secure` und geeignetem `SameSite`
-  setzen. Ablauf und Logout umsetzen; schreibende Cookie-authentifizierte Anfragen
-  gegen CSRF schützen (ungewollte Aktionen durch fremde Webseiten).
+      setzen. Ablauf und Logout umsetzen; schreibende Cookie-authentifizierte Anfragen
+      gegen CSRF schützen (ungewollte Aktionen durch fremde Webseiten).
 - [ ] Nutzer-ID ausschließlich aus einer serverseitig geprüften Sitzung bzw.
-  einem geprüften Token ableiten. Lesen, Anlegen, Ändern, Löschen und Summen auf
-  eigene Daten begrenzen; auch referenzierte Kategorien müssen dem Nutzer gehören.
+      einem geprüften Token ableiten. Lesen, Anlegen, Ändern, Löschen und Summen auf
+      eigene Daten begrenzen; auch referenzierte Kategorien müssen dem Nutzer gehören.
 - **Fertig, wenn:** Tests mit zwei Nutzern zeigen, dass A die Daten von B weder
   lesen noch verändern oder als Kategorie zuordnen kann. Fehlende/abgelaufene
   Anmeldung, Logout, CSRF-Schutz und Login-Limits sind ebenfalls getestet.
@@ -191,13 +191,13 @@ Frontend-Demo darf nur Fake-Daten verwenden und keinen ungeschützten Backend-Zu
 ### Deployment (18.–22.01.)
 
 - [ ] HTTPS, geeignete Sicherheitsheader und eine zur App passende Content Security
-  Policy konfigurieren; die App anschließend im Browser prüfen.
+      Policy konfigurieren; die App anschließend im Browser prüfen.
 - [ ] Secrets nur serverseitig über die Deployment-Umgebung verwalten, `.env`
-  nicht committen. Datenbankzugang nur mit benötigten Rechten.
+      nicht committen. Datenbankzugang nur mit benötigten Rechten.
 - [ ] Abhängigkeiten auf bekannte Schwachstellen prüfen und relevante Befunde
-  bewerten; Updates mit Tests prüfen, nicht blind per `audit fix --force` übernehmen.
+      bewerten; Updates mit Tests prüfen, nicht blind per `audit fix --force` übernehmen.
 - [ ] Vor öffentlicher Freigabe ein Sicherheitsreview und die obigen Negativtests
-  durchführen. Bekannte hochriskante Befunde zuerst beheben; verbleibende Risiken dokumentieren.
+      durchführen. Bekannte hochriskante Befunde zuerst beheben; verbleibende Risiken dokumentieren.
 - **Fertig, wenn:** Die Schutzmaßnahmen auch in der bereitgestellten Umgebung
   geprüft sind. Ein sauberer Dependency-Scan allein ist kein Sicherheitsnachweis.
 
@@ -219,27 +219,27 @@ offen bleibt nur V1 für Phase 2.
 **Umsetzung (Code)**
 
 - [x] **U1 – Sicherheitstest ergänzt:** Ein Test zeigt, dass eine HTML-artige
-  Notiz wie `<b>Test</b>` als normaler Text erscheint (Phase-1-Sicherheitsziel).
+      Notiz wie `<b>Test</b>` als normaler Text erscheint (Phase-1-Sicherheitsziel).
 - [x] **U2 – „Kopieren“-Button im Euro-Umrechner:** entfernt (Entscheidung
-  23.10.2026). Der Umrechner hat nur „Übernehmen“; ein Klick trägt die Cent-Zahl
-  direkt ins Betragsfeld ein.
+      23.10.2026). Der Umrechner hat nur „Übernehmen“; ein Klick trägt die Cent-Zahl
+      direkt ins Betragsfeld ein.
 - [x] **U3 – Sehr große Euro-Beträge:** Ergibt die Umrechnung keine sicher
-  darstellbare ganze Cent-Zahl (über 90.071.992.547.409,91 €), zeigt der Umrechner
-  einen Hinweis und „Übernehmen“ bleibt deaktiviert. Gerechnet wird ohne Runden.
+      darstellbare ganze Cent-Zahl (über 90.071.992.547.409,91 €), zeigt der Umrechner
+      einen Hinweis und „Übernehmen“ bleibt deaktiviert. Gerechnet wird ohne Runden.
 
 **Entscheidungen der Nutzerin (23.10.2026)**
 
 - [x] **E1 – Notiz bleibt Pflicht:** nicht leer, höchstens 100 Zeichen. Das
-  Datenmodell verwendet deshalb `note` statt `note?`.
+      Datenmodell verwendet deshalb `note` statt `note?`.
 - [x] **E2 – Kategorien haben einen Typ:** Jede Kategorie gehört entweder zu
-  Ausgaben oder zu Einnahmen (`Category.type`). Damit ist auch die alte Frage
-  „Sollen Einnahmen eine Kategorie haben?“ beantwortet: ja.
+      Ausgaben oder zu Einnahmen (`Category.type`). Damit ist auch die alte Frage
+      „Sollen Einnahmen eine Kategorie haben?“ beantwortet: ja.
 - [x] **E3 – Verwendete Kategorien lassen sich nicht löschen:** Statt zu löschen
-  erscheint bei der Kategorie der Hinweis „Diese Kategorie wird noch von
-  1 Transaktion verwendet.“ (bei mehreren mit Anzahl). Zuerst die betroffenen
-  Einträge ändern oder löschen. Ab Phase 2 lehnt der Server das mit 409 ab.
+      erscheint bei der Kategorie der Hinweis „Diese Kategorie wird noch von
+      1 Transaktion verwendet.“ (bei mehreren mit Anzahl). Zuerst die betroffenen
+      Einträge ändern oder löschen. Ab Phase 2 lehnt der Server das mit 409 ab.
 - [x] **E4 – Die dritte Summenkarte heißt „Differenz“** statt „Saldo“, weil der
-  Wert nicht der Kontostand ist.
+      Wert nicht der Kontostand ist.
 
 **Kleine Korrekturen in dieser Spezifikation**
 
@@ -250,15 +250,17 @@ offen bleibt nur V1 für Phase 2.
 
 **Vor der Verbindung von Frontend und Backend (14.–18.12.)**
 
-- [ ] **V1 – Datenwerte angleichen:** Server nutzt `income`/`expense` und `Salary`,
-  der Client `INCOME`/`EXPENSE` und `Gehalt`. Gemeinsame Schreibweise festlegen.
-  `/api/summary` zählt derzeit Einnahmen und Ausgaben je Kategorie zusammen.
-  **Entscheidung 26.10.2026:** Der Server passt sich dem Client an (`INCOME`/`EXPENSE`,
-  `Gehalt`/`Essen`/`Transport`), der Client bleibt unverändert. `/api/summary`
-  liefert vorerst nur die Ausgabensummen je Kategorie in Cent, ohne Datumsfilter;
-  Einnahmen und Differenz kommen in Phase 2.
-  **Stand 26.10.2026:** Code in `server/src/daten.js` und `berechnungen.js` angepasst
-  und von Hand geprüft. Server-Tests fehlen noch, deshalb bleibt V1 offen.
+- [x] **V1 – Datenwerte angleichen:** Server nutzt `income`/`expense` und `Salary`,
+      der Client `INCOME`/`EXPENSE` und `Gehalt`. Gemeinsame Schreibweise festlegen.
+      `/api/summary` zählt derzeit Einnahmen und Ausgaben je Kategorie zusammen.
+      **Entscheidung 26.10.2026:** Der Server passt sich dem Client an (`INCOME`/`EXPENSE`,
+      `Gehalt`/`Essen`/`Transport`), der Client bleibt unverändert. `/api/summary`
+      liefert vorerst nur die Ausgabensummen je Kategorie in Cent, ohne Datumsfilter;
+      Einnahmen und Differenz kommen in Phase 2.
+      **Stand 26.10.2026:** Code in `server/src/daten.js` und `berechnungen.js` angepasst
+      und von Hand geprüft.
+
+  30.10.2026: Server-Tests in berechnungen.test.js 9 Tests sind grün, alle Kriterien sind erfüllt.
 
   Fertig fürs Abhaken, wenn:
   1. `GET /api/transactions`: id 1 = `INCOME`/`Gehalt`, id 2 = `EXPENSE`/`Essen`,
@@ -387,11 +389,11 @@ Du bist angemeldet und wählst den Zeitraum **01.–31. Oktober**. Angezeigt und
 berechnet werden nur deine Transaktionen in diesem Zeitraum. Die Einnahmen und
 Ausgaben anderer Nutzer werden weder angezeigt noch mitgerechnet.
 
-| Wert | Berechnung | Betrag |
-| --- | --- | --- |
-| Einnahmen | Gehalt 3.200 € + Geschenk 100 € | 3.300 € |
-| Ausgaben | Miete 1.000 € + Lebensmittel 300 € + Transport 100 € | 1.400 € |
-| **Differenz** | **3.300 € − 1.400 €** | **1.900 €** |
+| Wert          | Berechnung                                           | Betrag      |
+| ------------- | ---------------------------------------------------- | ----------- |
+| Einnahmen     | Gehalt 3.200 € + Geschenk 100 €                      | 3.300 €     |
+| Ausgaben      | Miete 1.000 € + Lebensmittel 300 € + Transport 100 € | 1.400 €     |
+| **Differenz** | **3.300 € − 1.400 €**                                | **1.900 €** |
 
 Die Differenz zeigt, wie viel du im Zeitraum mehr eingenommen als ausgegeben
 hast. Sie ist **nicht automatisch dein Kontostand**, weil beispielsweise Geld
